@@ -493,6 +493,16 @@ isOneToOne: false
           Functions: {
             "current_user_has_permission":
 { Args: { "permission_key": string,"scope_id"?: string,"scope_type": string }; Returns: boolean
+                           },
+"list_university_staff":
+{ Args: { "target_university_id": string }; Returns: {
+              "assignment_id": string,"display_name": string,"email": string,"ends_at": string,"scope_id": string,"scope_type": string,"staff_type": string,"starts_at": string,"status": string,"title": string,"updated_at": string,"user_id": string
+            }[]
+                           },
+"lookup_university_staff_candidate":
+{ Args: { "email_query": string,"target_university_id": string }; Returns: {
+              "display_name": string,"email": string,"user_id": string
+            }[]
                            }
           }
           Enums: {
