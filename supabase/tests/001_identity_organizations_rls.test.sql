@@ -120,11 +120,18 @@ select is_empty(
   'draft universities remain private'
 );
 
-select throws_ok(
-  $$update public.universities set name = 'Changed' where id = 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa1'$$,
-  '42501',
-  null,
-  'authenticated callers cannot update universities without an explicit grant'
+select results_eq(
+  $$
+    with changed as (
+      update public.universities
+      set name = 'Changed'
+      where id = 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa1'
+      returning id
+    )
+    select count(*) from changed
+  $$,
+  array[0::bigint],
+  'authenticated callers without platform permission cannot update universities'
 );
 
 select results_eq(

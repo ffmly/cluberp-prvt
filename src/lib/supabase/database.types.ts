@@ -491,7 +491,9 @@ isOneToOne: false
             [_ in never]: never
           }
           Functions: {
-            [_ in never]: never
+            "current_user_has_permission":
+{ Args: { "permission_key": string,"scope_id"?: string,"scope_type": string }; Returns: boolean
+                           }
           }
           Enums: {
             [_ in never]: never
