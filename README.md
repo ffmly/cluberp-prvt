@@ -23,6 +23,20 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+## Local Supabase
+
+Copy `.env.example` to `.env.local`, start Docker Desktop, then run:
+
+```bash
+npm run db:start
+npm run db:reset
+npm run db:test
+npm run db:lint
+npm run db:types
+```
+
+Stop the local stack without deleting its data with `npm run db:stop`.
+
 ## Verification
 
 ```bash
