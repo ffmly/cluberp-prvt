@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { notFound, redirect } from "next/navigation";
+import { connection } from "next/server";
 
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { signOutAction } from "@/features/auth/actions";
@@ -20,6 +21,7 @@ export default async function AdminLayout({
     notFound();
   }
 
+  await connection();
   const supabase = await createClient();
   const { data, error } = await supabase.auth.getClaims();
   const claims = data?.claims;
@@ -94,6 +96,18 @@ export default async function AdminLayout({
                 href="/admin/universities"
               >
                 {t("universities")}
+              </Link>
+              <Link
+                className="rounded-xl px-3 py-2 text-sm font-semibold text-[var(--text-muted)] transition hover:bg-slate-100 hover:text-[var(--text-strong)]"
+                href="/admin/users"
+              >
+                {t("users")}
+              </Link>
+              <Link
+                className="rounded-xl px-3 py-2 text-sm font-semibold text-[var(--text-muted)] transition hover:bg-slate-100 hover:text-[var(--text-strong)]"
+                href="/admin/audit"
+              >
+                {t("audit")}
               </Link>
               <Link
                 className="rounded-xl px-3 py-2 text-sm font-semibold text-[var(--text-muted)] transition hover:bg-slate-100 hover:text-[var(--text-strong)]"

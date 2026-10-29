@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 
+test.setTimeout(60_000);
+
 test("platform manager creates a university through the protected workflow", async ({
   page,
 }) => {
@@ -129,5 +131,50 @@ test("platform manager creates a university through the protected workflow", asy
   ).toBeVisible();
   await expect(
     assignmentCard.locator("span").filter({ hasText: /^Suspended$/ }),
+  ).toBeVisible();
+
+  await page.getByRole("link", { name: "Users" }).click();
+  await expect(page).toHaveURL(/\/en\/admin\/users$/);
+  await page.getByLabel("Search users").fill("staff-candidate@example.test");
+  await page.getByRole("button", { name: "Search" }).click();
+
+  const userCard = page.locator("article").filter({
+    has: page.getByRole("heading", { name: "E2E Staff Candidate" }),
+  });
+  await userCard.getByText("Suspend access").click();
+  await userCard
+    .getByLabel("Reason")
+    .fill("E2E account access policy verification");
+  await userCard.getByRole("button", { name: "Suspend user" }).click();
+  await expect(page.getByText("User access suspended successfully.")).toBeVisible();
+  await expect(
+    userCard.locator("span").filter({ hasText: /^Suspended$/ }),
+  ).toBeVisible();
+
+  await page.getByRole("link", { name: "Audit" }).click();
+  await expect(page).toHaveURL(/\/en\/admin\/audit$/);
+  await expect(
+    page.getByText("User access suspended", { exact: true }).first(),
+  ).toBeVisible();
+  await expect(
+    page.getByText("Target: E2E Staff Candidate").first(),
+  ).toBeVisible();
+
+  await page.getByRole("link", { name: "Users" }).click();
+  await page.getByLabel("Search users").fill("staff-candidate@example.test");
+  await page.getByRole("button", { name: "Search" }).click();
+  const suspendedUserCard = page.locator("article").filter({
+    has: page.getByRole("heading", { name: "E2E Staff Candidate" }),
+  });
+  await suspendedUserCard.getByText("Reactivate access").click();
+  await suspendedUserCard
+    .getByLabel("Reason")
+    .fill("E2E verification completed successfully");
+  await suspendedUserCard
+    .getByRole("button", { name: "Reactivate user" })
+    .click();
+  await expect(page.getByText("User access reactivated successfully.")).toBeVisible();
+  await expect(
+    suspendedUserCard.locator("span").filter({ hasText: /^Active$/ }),
   ).toBeVisible();
 });

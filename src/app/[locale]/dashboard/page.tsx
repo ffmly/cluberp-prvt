@@ -52,7 +52,7 @@ export default async function DashboardPage({
     redirect(`/${locale}/login`);
   }
 
-  const [t, common, platformPermission] = await Promise.all([
+  const [t, common, platformPermission, profileResult] = await Promise.all([
     getTranslations({ locale, namespace: "Dashboard" }),
     getTranslations({ locale, namespace: "Common" }),
     currentUserHasPermission(
@@ -60,11 +60,45 @@ export default async function DashboardPage({
       "platform.universities_manage",
       { type: "platform" },
     ),
+    supabase
+      .from("profiles")
+      .select("account_status,suspension_reason")
+      .eq("id", claims.sub)
+      .maybeSingle(),
   ]);
   const email =
     typeof claims.email === "string"
       ? claims.email
       : common("signedInMember");
+
+  if (profileResult.data?.account_status === "suspended") {
+    return (
+      <main className="grid min-h-screen place-items-center bg-[var(--surface-canvas)] p-6">
+        <section className="w-full max-w-xl rounded-3xl border border-rose-200 bg-white p-8 text-center shadow-xl shadow-slate-900/5 sm:p-10">
+          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-rose-700">
+            {t("suspendedEyebrow")}
+          </p>
+          <h1 className="mt-4 text-3xl font-semibold tracking-tight text-[var(--text-strong)]">
+            {t("suspendedTitle")}
+          </h1>
+          <p className="mt-4 leading-7 text-[var(--text-muted)]">
+            {t("suspendedDescription")}
+          </p>
+          {profileResult.data.suspension_reason ? (
+            <p className="mt-5 rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-900">
+              {profileResult.data.suspension_reason}
+            </p>
+          ) : null}
+          <form action={signOutAction} className="mt-7">
+            <input name="locale" type="hidden" value={locale} />
+            <button className="min-h-11 rounded-xl bg-[var(--brand-strong)] px-5 py-2.5 text-sm font-semibold text-white" type="submit">
+              {t("signOut")}
+            </button>
+          </form>
+        </section>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-[var(--surface-canvas)] p-6 sm:p-10">

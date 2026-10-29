@@ -135,6 +135,14 @@ set
   identity_data = excluded.identity_data,
   updated_at = excluded.updated_at;
 
+update public.profiles
+set
+  account_status = 'active',
+  suspended_at = null,
+  suspended_by = null,
+  suspension_reason = null
+where id = 'e2e00000-0000-4000-8000-000000000002';
+
 insert into public.platform_role_assignments (user_id, role_id, assigned_by)
 select
   'e2e00000-0000-4000-8000-000000000001',

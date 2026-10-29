@@ -616,15 +616,14 @@ CI on pull/push installs with the lockfile, validates formatting/lint/types/test
 
 **Current milestone:** Phase 2 — Global and university administration
 
-**Delivered on `main`:** secure platform dashboard, bilingual university create/read/update/archive workflows, campus/faculty/department management, secure university staff lookup and assignment management, database-enforced scoped authorization, and an authenticated browser path covering university → campus → faculty → department → staff assignment and suspension.
+**Delivered on `main`:** secure platform dashboard, bilingual university create/read/update/archive workflows, campus/faculty/department management, secure university staff lookup and assignment management, user suspension/reactivation with append-only audit history, database-enforced scoped authorization, and an authenticated browser path covering university → campus → faculty → department → staff assignment → user suspension/audit/reactivation.
 
-**Verification baseline:** 20 unit/schema tests, 60 pgTAP database tests, 5 Playwright flows, database lint, security advisors, TypeScript, ESLint, and the production build pass locally. The delivered baseline also passes GitHub Actions; every new milestone must restore that full green baseline before completion.
+**Verification baseline:** 22 unit/schema tests, 77 pgTAP database tests, 5 Playwright flows, database lint, security advisors, TypeScript, ESLint, and the production build pass locally. The delivered baseline also passes GitHub Actions; every new milestone must restore that full green baseline before completion.
 
 The next implementation sequence is:
 
-1. User status/suspension workflows and privileged-action audit events.
-2. Permission/role administration with escalation protection.
-3. Club creation and renewal requests with review transitions.
+1. Permission/role administration with escalation protection.
+2. Club creation and renewal requests with review transitions.
 
 ### Phase 0 — Repository and planning
 
@@ -655,7 +654,7 @@ The next implementation sequence is:
 - [x] University staff assignment management UI and exact-match authorized user lookup, with database grants, RLS, pgTAP, schema, and authenticated browser coverage.
 - [ ] Permission/role administration with escalation protection.
 - [ ] Club creation/renewal requests and approval workflows.
-- [ ] User status/suspension workflows and audit viewer.
+- [x] User status/suspension workflows and append-only audit viewer, with immediate database permission denial and authenticated browser coverage.
 
 ### Phase 3 — Club and student operations
 

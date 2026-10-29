@@ -64,6 +64,9 @@
     "eyebrow": "Protected workspace",
     "heading": "Your operating space is being prepared.",
     "description": "Your identity has been verified. University and club navigation will appear here only after the database assigns an active scoped role.",
+    "suspendedEyebrow": "Account restricted",
+    "suspendedTitle": "Your application access is suspended.",
+    "suspendedDescription": "Privileged operations and workspaces are unavailable. Contact a platform administrator if you need this decision reviewed.",
     "platformAdminTitle": "Platform administration is available",
     "platformAdminDescription": "Your active role can manage universities and their operating status.",
     "openAdministration": "Open administration",
@@ -83,6 +86,8 @@
     "navigationLabel": "Administration navigation",
     "overview": "Overview",
     "universities": "Universities",
+    "users": "Users",
+    "audit": "Audit",
     "workspace": "Workspace",
     "signOut": "Sign out",
     "accessDeniedEyebrow": "Restricted area",
@@ -106,7 +111,7 @@
     },
     "loadError": "University metrics could not be loaded. Try again in a moment.",
     "nextTitle": "Next in the administration roadmap",
-    "nextDescription": "University organizational units and staff assignments already have database isolation. Their management screens are the next platform workflow to be connected."
+    "nextDescription": "University organization, staff assignments, user suspension, and audit history are operational. Role and permission administration is the next protected platform workflow."
   },
   "UniversityAdministration": {
     "title": "University management",
@@ -293,6 +298,58 @@
       "userNotFound": "No registered user matches that exact email address.",
       "duplicateAssignment": "This user already has a current assignment with the same scope and staff function.",
       "saveFailed": "The staff assignment could not be saved. Try again in a moment."
+    }
+  },
+  "UserAdministration": {
+    "title": "User administration",
+    "eyebrow": "Platform users",
+    "heading": "Manage user access safely.",
+    "description": "Search registered accounts, suspend application access, and reactivate users with an explicit reason. Every transition is recorded in the immutable audit log.",
+    "searchLabel": "Search users",
+    "searchPlaceholder": "Name or email address",
+    "search": "Search",
+    "empty": "No users match this search.",
+    "loadError": "Users could not be loaded. Try again in a moment.",
+    "createdAt": "Registered",
+    "suspensionReason": "Suspension reason",
+    "currentAccount": "This is your current account. Self-suspension is blocked.",
+    "openSuspend": "Suspend access",
+    "openActivate": "Reactivate access",
+    "suspended": "User access suspended successfully.",
+    "reactivated": "User access reactivated successfully.",
+    "statuses": {
+      "active": "Active",
+      "suspended": "Suspended"
+    },
+    "form": {
+      "reason": "Reason",
+      "reasonPlaceholder": "Record the operational or policy reason",
+      "suspend": "Suspend user",
+      "suspending": "Suspending…",
+      "activate": "Reactivate user",
+      "activating": "Reactivating…"
+    },
+    "errors": {
+      "checkFields": "Check the highlighted fields.",
+      "reasonInvalid": "Enter a reason between 5 and 500 characters.",
+      "notAuthorized": "You no longer have permission to manage users.",
+      "protectedAccount": "This protected account cannot be suspended by this action.",
+      "invalidTransition": "The requested account transition is no longer valid.",
+      "saveFailed": "The account status could not be changed. Try again in a moment."
+    }
+  },
+  "AuditViewer": {
+    "title": "Platform audit log",
+    "eyebrow": "Immutable history",
+    "heading": "Review privileged actions.",
+    "description": "Security-relevant account changes are stored as append-only events with their actor, target, reason, and timestamp.",
+    "loadError": "Audit events could not be loaded. Try again in a moment.",
+    "empty": "No audit events have been recorded yet.",
+    "actor": "Performed by {name}",
+    "target": "Target: {name}",
+    "actions": {
+      "suspended": "User access suspended",
+      "reactivated": "User access reactivated"
     }
   },
   "Common": {

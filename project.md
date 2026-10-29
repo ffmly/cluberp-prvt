@@ -1204,7 +1204,7 @@ Use the master plan to maintain an ordered, actionable checklist.
 - [x] Platform administration.
 - [x] University management.
 - [x] Organizational hierarchy.
-- [ ] User administration.
+- [x] User administration.
 - [ ] Roles and permissions.
 - [ ] Club registration and approvals.
 - [x] Administrative dashboards.
