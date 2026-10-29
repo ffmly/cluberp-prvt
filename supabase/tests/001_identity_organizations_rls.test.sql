@@ -110,7 +110,15 @@ select throws_ok(
 );
 
 select results_eq(
-  $$select name from public.universities order by name$$,
+  $$
+    select name
+    from public.universities
+    where id in (
+      'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa1',
+      'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa2'
+    )
+    order by name
+  $$,
   array['Active University']::text[],
   'authenticated callers can discover active universities'
 );

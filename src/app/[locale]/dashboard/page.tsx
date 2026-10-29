@@ -4,7 +4,9 @@ import { notFound, redirect } from "next/navigation";
 
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { signOutAction } from "@/features/auth/actions";
+import { currentUserHasPermission } from "@/features/authorization/permissions";
 import { isAppLocale } from "@/i18n/locales";
+import { Link } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 
 export const instant = false;
@@ -50,9 +52,14 @@ export default async function DashboardPage({
     redirect(`/${locale}/login`);
   }
 
-  const [t, common] = await Promise.all([
+  const [t, common, platformPermission] = await Promise.all([
     getTranslations({ locale, namespace: "Dashboard" }),
     getTranslations({ locale, namespace: "Common" }),
+    currentUserHasPermission(
+      supabase,
+      "platform.universities_manage",
+      { type: "platform" },
+    ),
   ]);
   const email =
     typeof claims.email === "string"
@@ -100,6 +107,25 @@ export default async function DashboardPage({
           <p className="mt-5 max-w-2xl text-lg leading-8 text-[var(--text-muted)]">
             {t("description")}
           </p>
+
+          {platformPermission.allowed ? (
+            <div className="mt-8 rounded-2xl border border-teal-200 bg-teal-50 p-5 sm:flex sm:items-center sm:justify-between sm:gap-6">
+              <div>
+                <p className="font-semibold text-teal-950">
+                  {t("platformAdminTitle")}
+                </p>
+                <p className="mt-1 text-sm leading-6 text-teal-800">
+                  {t("platformAdminDescription")}
+                </p>
+              </div>
+              <Link
+                className="mt-4 inline-flex min-h-11 shrink-0 items-center justify-center rounded-xl bg-teal-800 px-5 py-2.5 text-sm font-semibold text-white sm:mt-0"
+                href="/admin"
+              >
+                {t("openAdministration")}
+              </Link>
+            </div>
+          ) : null}
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {moduleKeys.map((key) => (

@@ -1201,13 +1201,13 @@ Use the master plan to maintain an ordered, actionable checklist.
 
 ## Phase 2 — Global administration
 
-- [ ] Platform administration.
-- [ ] University management.
+- [x] Platform administration.
+- [x] University management.
 - [ ] Organizational hierarchy.
 - [ ] User administration.
 - [ ] Roles and permissions.
 - [ ] Club registration and approvals.
-- [ ] Administrative dashboards.
+- [x] Administrative dashboards.
 
 ## Phase 3 — Club operations
 

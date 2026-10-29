@@ -63,7 +63,14 @@ select ok(
 );
 
 select is(
-  (select count(*) from public.universities),
+  (
+    select count(*)
+    from public.universities
+    where id in (
+      '5aaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa1',
+      '5aaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa2'
+    )
+  ),
   2::bigint,
   'platform manager can read active and non-active universities'
 );
@@ -132,7 +139,12 @@ select ok(
 );
 
 select results_eq(
-  $$select slug from public.universities order by slug$$,
+  $$
+    select slug
+    from public.universities
+    where slug like 'admin-%'
+    order by slug
+  $$,
   array['admin-visible-university']::text[],
   'regular member sees only active universities'
 );

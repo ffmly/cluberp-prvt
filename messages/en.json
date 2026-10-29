@@ -64,6 +64,9 @@
     "eyebrow": "Protected workspace",
     "heading": "Your operating space is being prepared.",
     "description": "Your identity has been verified. University and club navigation will appear here only after the database assigns an active scoped role.",
+    "platformAdminTitle": "Platform administration is available",
+    "platformAdminDescription": "Your active role can manage universities and their operating status.",
+    "openAdministration": "Open administration",
     "moduleDescription": "Access appears when your scoped permissions allow it.",
     "modules": {
       "universities": "University administration",
@@ -72,6 +75,92 @@
       "events": "Events and attendance",
       "finance": "Finance and assets",
       "design": "Design Studio"
+    }
+  },
+  "Admin": {
+    "brand": "Club ERP administration",
+    "manager": "Platform manager",
+    "navigationLabel": "Administration navigation",
+    "overview": "Overview",
+    "universities": "Universities",
+    "workspace": "Workspace",
+    "signOut": "Sign out",
+    "accessDeniedEyebrow": "Restricted area",
+    "accessDeniedTitle": "You do not have platform access.",
+    "accessDeniedDescription": "This area is limited to users with the active platform university-management permission.",
+    "backToWorkspace": "Back to workspace"
+  },
+  "AdminOverview": {
+    "title": "Platform administration",
+    "eyebrow": "Platform administration",
+    "heading": "A clear view of every university.",
+    "description": "Monitor university lifecycle states and open the secure management workspace when details need to change.",
+    "manageUniversities": "Manage universities",
+    "metricsLabel": "University status summary",
+    "totalUniversities": "Total universities",
+    "statuses": {
+      "draft": "Draft",
+      "active": "Active",
+      "suspended": "Suspended",
+      "archived": "Archived"
+    },
+    "loadError": "University metrics could not be loaded. Try again in a moment.",
+    "nextTitle": "Next in the administration roadmap",
+    "nextDescription": "University organizational units and staff assignments already have database isolation. Their management screens are the next platform workflow to be connected."
+  },
+  "UniversityAdministration": {
+    "title": "University management",
+    "eyebrow": "Global administration",
+    "heading": "Manage university tenants safely.",
+    "description": "Create tenants, update their defaults, suspend access, or archive them without destroying operational history.",
+    "newUniversity": "Create a university",
+    "newUniversityDescription": "New universities start in draft unless you explicitly activate them.",
+    "existingUniversities": "Existing universities",
+    "archiveNote": "Archiving replaces destructive deletion and preserves the audit trail.",
+    "count": "{count, plural, =0 {No universities} =1 {1 university} other {# universities}}",
+    "empty": "No universities have been created yet.",
+    "loadError": "Universities could not be loaded. Try again in a moment.",
+    "updatedAt": "Updated {date}",
+    "created": "University created successfully.",
+    "updated": "University changes saved.",
+    "statuses": {
+      "draft": "Draft",
+      "active": "Active",
+      "suspended": "Suspended",
+      "archived": "Archived"
+    },
+    "locales": {
+      "en": "English",
+      "ar": "Arabic"
+    },
+    "form": {
+      "name": "University name",
+      "namePlaceholder": "Example University",
+      "slug": "URL slug",
+      "slugHint": "Lowercase letters, numbers, and single hyphens only.",
+      "status": "Operating status",
+      "locale": "Default language",
+      "timeZone": "Default time zone",
+      "timeZoneHint": "Use a valid IANA zone such as Africa/Algiers.",
+      "currency": "Default currency",
+      "currencyHint": "Three-letter ISO code, for example DZD.",
+      "create": "Create university",
+      "creating": "Creating…",
+      "save": "Save changes",
+      "saving": "Saving…"
+    },
+    "errors": {
+      "checkFields": "Check the highlighted fields.",
+      "nameInvalid": "Enter a name between 2 and 200 characters.",
+      "slugInvalid": "Use lowercase letters, numbers, and single hyphens only.",
+      "statusInvalid": "Choose a valid university status.",
+      "localeInvalid": "Choose English or Arabic.",
+      "timeZoneInvalid": "Enter a valid IANA time zone.",
+      "currencyInvalid": "Enter a three-letter currency code.",
+      "sessionExpired": "Your session expired. Sign in and try again.",
+      "notAuthorized": "You no longer have permission to manage universities.",
+      "slugTaken": "That URL slug is already in use.",
+      "saveFailed": "The university could not be saved. Try again in a moment."
     }
   },
   "Common": {

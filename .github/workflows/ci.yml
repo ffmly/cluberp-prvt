@@ -46,7 +46,7 @@ jobs:
 
   e2e:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -54,18 +54,24 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - run: npm run db:start
+      - name: Prepare authenticated browser test
+        run: |
+          STATUS_JSON="$(npx supabase status -o json)"
+          DB_URL="$(echo "$STATUS_JSON" | jq -r '.DB_URL')"
+          API_URL="$(echo "$STATUS_JSON" | jq -r '.API_URL')"
+          PUBLISHABLE_KEY="$(echo "$STATUS_JSON" | jq -r '.PUBLISHABLE_KEY')"
+          psql "$DB_URL" --file e2e/fixtures/platform-admin.sql
+          echo "NEXT_PUBLIC_SUPABASE_URL=$API_URL" >> "$GITHUB_ENV"
+          echo "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=$PUBLISHABLE_KEY" >> "$GITHUB_ENV"
       - run: npx playwright install --with-deps chromium
       - run: npm run build
         env:
           NEXT_PUBLIC_APP_URL: http://127.0.0.1:3200
-          NEXT_PUBLIC_SUPABASE_URL: http://127.0.0.1:54321
-          NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_test_only
       - run: npm run test:e2e
         env:
           CI: "true"
           NEXT_PUBLIC_APP_URL: http://127.0.0.1:3200
-          NEXT_PUBLIC_SUPABASE_URL: http://127.0.0.1:54321
-          NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_test_only
       - uses: actions/upload-artifact@v7
         if: ${{ !cancelled() }}
         with:
