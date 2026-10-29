@@ -5,7 +5,33 @@ export type Database = {
   
   "public": {
           Tables: {
-            "club_role_assignments": {
+            "campuses": {
+                  Row: {
+                    "address": string | null,"archived_at": string | null,"code": string,"created_at": string,"created_by": string,"id": string,"name": string,"status": string,"university_id": string,"updated_at": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "address"?: string | null,"archived_at"?: string | null,"code": string,"created_at"?: string,"created_by": string,"id"?: string,"name": string,"status"?: string,"university_id": string,"updated_at"?: string
+                  }
+                  Update: {
+                    "address"?: string | null,"archived_at"?: string | null,"code"?: string,"created_at"?: string,"created_by"?: string,"id"?: string,"name"?: string,"status"?: string,"university_id"?: string,"updated_at"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "campuses_created_by_fkey"
+      columns: ["created_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "campuses_university_id_fkey"
+      columns: ["university_id"]
+isOneToOne: false
+      referencedRelation: "universities"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"club_role_assignments": {
                   Row: {
                     "assigned_by": string,"club_id": string,"created_at": string,"ends_at": string | null,"id": string,"revocation_reason": string | null,"revoked_at": string | null,"revoked_by": string | null,"role_id": string,"starts_at": string,"updated_at": string,"user_id": string
                   }
@@ -69,6 +95,70 @@ isOneToOne: false
       referencedColumns: ["id"]
     },{
       foreignKeyName: "clubs_university_id_fkey"
+      columns: ["university_id"]
+isOneToOne: false
+      referencedRelation: "universities"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"departments": {
+                  Row: {
+                    "archived_at": string | null,"code": string,"created_at": string,"created_by": string,"faculty_id": string,"id": string,"name": string,"status": string,"university_id": string,"updated_at": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "archived_at"?: string | null,"code": string,"created_at"?: string,"created_by": string,"faculty_id": string,"id"?: string,"name": string,"status"?: string,"university_id": string,"updated_at"?: string
+                  }
+                  Update: {
+                    "archived_at"?: string | null,"code"?: string,"created_at"?: string,"created_by"?: string,"faculty_id"?: string,"id"?: string,"name"?: string,"status"?: string,"university_id"?: string,"updated_at"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "departments_created_by_fkey"
+      columns: ["created_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "departments_faculty_id_university_id_fkey"
+      columns: ["faculty_id","university_id"]
+isOneToOne: false
+      referencedRelation: "faculties"
+      referencedColumns: ["id","university_id"]
+    },{
+      foreignKeyName: "departments_university_id_fkey"
+      columns: ["university_id"]
+isOneToOne: false
+      referencedRelation: "universities"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"faculties": {
+                  Row: {
+                    "archived_at": string | null,"campus_id": string,"code": string,"created_at": string,"created_by": string,"id": string,"name": string,"status": string,"university_id": string,"updated_at": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "archived_at"?: string | null,"campus_id": string,"code": string,"created_at"?: string,"created_by": string,"id"?: string,"name": string,"status"?: string,"university_id": string,"updated_at"?: string
+                  }
+                  Update: {
+                    "archived_at"?: string | null,"campus_id"?: string,"code"?: string,"created_at"?: string,"created_by"?: string,"id"?: string,"name"?: string,"status"?: string,"university_id"?: string,"updated_at"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "faculties_campus_id_university_id_fkey"
+      columns: ["campus_id","university_id"]
+isOneToOne: false
+      referencedRelation: "campuses"
+      referencedColumns: ["id","university_id"]
+    },{
+      foreignKeyName: "faculties_created_by_fkey"
+      columns: ["created_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "faculties_university_id_fkey"
       columns: ["university_id"]
 isOneToOne: false
       referencedRelation: "universities"
@@ -339,6 +429,56 @@ isOneToOne: false
       referencedColumns: ["id"]
     },{
       foreignKeyName: "university_role_assignments_user_id_fkey"
+      columns: ["user_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"university_staff_assignments": {
+                  Row: {
+                    "assigned_by": string,"campus_id": string | null,"created_at": string,"department_id": string | null,"ends_at": string | null,"faculty_id": string | null,"id": string,"scope_type": string,"staff_type": string,"starts_at": string,"status": string,"title": string | null,"university_id": string,"updated_at": string,"user_id": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "assigned_by": string,"campus_id"?: string | null,"created_at"?: string,"department_id"?: string | null,"ends_at"?: string | null,"faculty_id"?: string | null,"id"?: string,"scope_type": string,"staff_type": string,"starts_at"?: string,"status"?: string,"title"?: string | null,"university_id": string,"updated_at"?: string,"user_id": string
+                  }
+                  Update: {
+                    "assigned_by"?: string,"campus_id"?: string | null,"created_at"?: string,"department_id"?: string | null,"ends_at"?: string | null,"faculty_id"?: string | null,"id"?: string,"scope_type"?: string,"staff_type"?: string,"starts_at"?: string,"status"?: string,"title"?: string | null,"university_id"?: string,"updated_at"?: string,"user_id"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "university_staff_assignments_assigned_by_fkey"
+      columns: ["assigned_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "university_staff_assignments_campus_id_university_id_fkey"
+      columns: ["campus_id","university_id"]
+isOneToOne: false
+      referencedRelation: "campuses"
+      referencedColumns: ["id","university_id"]
+    },{
+      foreignKeyName: "university_staff_assignments_department_id_university_id_fkey"
+      columns: ["department_id","university_id"]
+isOneToOne: false
+      referencedRelation: "departments"
+      referencedColumns: ["id","university_id"]
+    },{
+      foreignKeyName: "university_staff_assignments_faculty_id_university_id_fkey"
+      columns: ["faculty_id","university_id"]
+isOneToOne: false
+      referencedRelation: "faculties"
+      referencedColumns: ["id","university_id"]
+    },{
+      foreignKeyName: "university_staff_assignments_university_id_fkey"
+      columns: ["university_id"]
+isOneToOne: false
+      referencedRelation: "universities"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "university_staff_assignments_user_id_fkey"
       columns: ["user_id"]
 isOneToOne: false
       referencedRelation: "profiles"

@@ -639,7 +639,7 @@ CI on pull/push installs with the lockfile, validates formatting/lint/types/test
 ### Phase 2 — Global and university administration
 
 - [ ] Platform dashboard and university CRUD.
-- [ ] Organizational units and university staff assignments.
+- [ ] Organizational units and university staff assignments (database model, grants, RLS, and pgTAP complete; management UI remains).
 - [ ] Permission/role administration with escalation protection.
 - [ ] Club creation/renewal requests and approval workflows.
 - [ ] User status/suspension workflows and audit viewer.
@@ -725,6 +725,7 @@ A feature is done only when its data model/constraints, server validation, autho
 | 2026-10-29 | Explicit grants plus per-operation RLS and pgTAP tests | RLS alone does not define table privileges; negative tests are required. |
 | 2026-10-29 | RBAC roles may contain permissions at the same or a descendant scope only | A platform role can govern all scopes, while university, club, and team roles cannot escalate above their ownership boundary. Database triggers enforce the rule. |
 | 2026-10-29 | English and Arabic use explicit `/en` and `/ar` route prefixes | Locale is durable across authentication callbacks and redirects, URLs are shareable, and each localized root renders the correct `lang` and text direction. |
+| 2026-10-29 | Organizational staff records do not grant permissions | Campus/faculty/department employment or supervision metadata is independent from RBAC assignments, preventing an organizational title from becoming implicit authorization. |
 | 2026-10-29 | Native structured Design Studio is baseline; Canva is optional | Canva external and in-Canva APIs have eligibility/review/product boundaries and do not guarantee embedded ERP editing. |
 | 2026-10-29 | Cloudinary private content uses signed restricted delivery | Unguessable public URLs are not authorization. |
 | 2026-10-29 | In-app notifications first | Avoids pretending an unconfigured email provider is operational. |
