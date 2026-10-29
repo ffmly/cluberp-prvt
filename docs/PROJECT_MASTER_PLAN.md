@@ -631,7 +631,7 @@ CI on pull/push installs with the lockfile, validates formatting/lint/types/test
 - [x] Add SSR browser/server clients and session refresh boundary.
 - [x] Add authentication pages/actions and protected shell.
 - [x] Create initial organization/profile/authorization migrations.
-- [ ] Add generated database type workflow.
+- [x] Add generated database type workflow.
 - [x] Add grants, RLS, pgTAP tests, and seed permissions/roles.
 - [ ] Add locale routing, English/Arabic dictionaries, base design system, and accessible shell.
 - [ ] Configure Vitest, Testing Library, Playwright, and CI.

@@ -2,12 +2,13 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 import { getPublicEnvironment } from "@/lib/env/public";
+import type { Database } from "@/lib/supabase/database.types";
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
   const environment = getPublicEnvironment();
 
-  const supabase = createServerClient(
+  const supabase = createServerClient<Database>(
     environment.supabaseUrl,
     environment.supabasePublishableKey,
     {
