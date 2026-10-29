@@ -26,6 +26,15 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+[dir="rtl"] body {
+  font-family: Tahoma, Arial, var(--font-geist-sans), sans-serif;
+}
+
+[dir="rtl"] .tracking-\[0\.18em\],
+[dir="rtl"] .tracking-\[0\.16em\] {
+  letter-spacing: normal;
+}
+
 ::selection {
   background: #99f6e4;
   color: #134e4a;

@@ -5,12 +5,22 @@ import { redirect } from "next/navigation";
 
 import { getPublicEnvironment } from "@/lib/env/public";
 import { createClient } from "@/lib/supabase/server";
+import { defaultLocale, isAppLocale } from "@/i18n/locales";
+import { getTranslations } from "next-intl/server";
+
+type FieldErrorCopy = Record<"displayName" | "email" | "password", string>;
+
+function getFormLocale(formData: FormData) {
+  const value = formData.get("locale");
+  return isAppLocale(value) ? value : defaultLocale;
+}
 
 import { signInSchema, signUpSchema } from "./schemas";
 import type { AuthActionState } from "./state";
 
 function toFieldErrors(
   issues: { path: PropertyKey[]; message: string }[],
+  copy: FieldErrorCopy,
 ): AuthActionState["fieldErrors"] {
   const fieldErrors: NonNullable<AuthActionState["fieldErrors"]> = {};
 
@@ -20,7 +30,7 @@ function toFieldErrors(
       (field === "displayName" || field === "email" || field === "password") &&
       !fieldErrors[field]
     ) {
-      fieldErrors[field] = issue.message;
+      fieldErrors[field] = copy[field];
     }
   }
 
@@ -31,6 +41,8 @@ export async function signInAction(
   _previousState: AuthActionState,
   formData: FormData,
 ): Promise<AuthActionState> {
+  const locale = getFormLocale(formData);
+  const t = await getTranslations({ locale, namespace: "Auth" });
   const parsed = signInSchema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
@@ -39,8 +51,12 @@ export async function signInAction(
   if (!parsed.success) {
     return {
       status: "error",
-      message: "Check the highlighted fields.",
-      fieldErrors: toFieldErrors(parsed.error.issues),
+      message: t("errors.checkFields"),
+      fieldErrors: toFieldErrors(parsed.error.issues, {
+        displayName: t("errors.displayNameInvalid"),
+        email: t("errors.emailInvalid"),
+        password: t("errors.passwordInvalid"),
+      }),
     };
   }
 
@@ -50,18 +66,20 @@ export async function signInAction(
   if (error) {
     return {
       status: "error",
-      message: "The email or password is incorrect, or the account is unavailable.",
+      message: t("errors.invalidCredentials"),
     };
   }
 
   revalidatePath("/", "layout");
-  redirect("/dashboard");
+  redirect(`/${locale}/dashboard`);
 }
 
 export async function signUpAction(
   _previousState: AuthActionState,
   formData: FormData,
 ): Promise<AuthActionState> {
+  const locale = getFormLocale(formData);
+  const t = await getTranslations({ locale, namespace: "Auth" });
   const parsed = signUpSchema.safeParse({
     displayName: formData.get("displayName"),
     email: formData.get("email"),
@@ -71,8 +89,12 @@ export async function signUpAction(
   if (!parsed.success) {
     return {
       status: "error",
-      message: "Check the highlighted fields.",
-      fieldErrors: toFieldErrors(parsed.error.issues),
+      message: t("errors.checkFields"),
+      fieldErrors: toFieldErrors(parsed.error.issues, {
+        displayName: t("errors.displayNameInvalid"),
+        email: t("errors.emailInvalid"),
+        password: t("errors.passwordInvalid"),
+      }),
     };
   }
 
@@ -83,31 +105,35 @@ export async function signUpAction(
     password: parsed.data.password,
     options: {
       data: { display_name: parsed.data.displayName },
-      emailRedirectTo: new URL("/auth/callback", environment.appUrl).toString(),
+      emailRedirectTo: new URL(
+        `/${locale}/auth/callback`,
+        environment.appUrl,
+      ).toString(),
     },
   });
 
   if (error) {
     return {
       status: "error",
-      message: "We could not create the account. Try again in a moment.",
+      message: t("errors.signUpFailed"),
     };
   }
 
   if (data.session) {
     revalidatePath("/", "layout");
-    redirect("/dashboard");
+    redirect(`/${locale}/dashboard`);
   }
 
   return {
     status: "success",
-    message: "Check your inbox to confirm your email before signing in.",
+    message: t("confirmationSent"),
   };
 }
 
-export async function signOutAction(): Promise<void> {
+export async function signOutAction(formData: FormData): Promise<void> {
+  const locale = getFormLocale(formData);
   const supabase = await createClient();
   await supabase.auth.signOut();
   revalidatePath("/", "layout");
-  redirect("/login");
+  redirect(`/${locale}/login`);
 }

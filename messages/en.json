@@ -1,0 +1,81 @@
+{
+  "Home": {
+    "eyebrow": "One platform. Every club workflow.",
+    "title": "Run university clubs with clarity and control.",
+    "description": "A secure multi-university workspace for memberships, events, finances, teams, documents, reporting, and controlled creative work.",
+    "signIn": "Sign in",
+    "createAccount": "Create account",
+    "foundationPhase": "Foundation phase",
+    "qualities": {
+      "isolationTitle": "Tenant isolation",
+      "isolationDescription": "University and club scoped",
+      "securityTitle": "Secure by default",
+      "securityDescription": "PostgreSQL RLS enforced",
+      "teamsTitle": "Built for teams",
+      "teamsDescription": "Role-aware workflows"
+    },
+    "statusTitle": "Foundation is operational",
+    "statusDescription": "Authentication, tenant boundaries, scoped roles, and database security checks are running locally. The next modules build on this verified foundation.",
+    "milestonesLabel": "Foundation milestones",
+    "milestones": {
+      "architecture": "Architecture and security plan",
+      "application": "Next.js application baseline",
+      "database": "Supabase authentication and schema",
+      "authorization": "Scoped RBAC and RLS tests"
+    },
+    "footer": "Built for accountable, accessible, and secure university club operations."
+  },
+  "Auth": {
+    "signInTitle": "Welcome back",
+    "signUpTitle": "Create your account",
+    "signInDescription": "Sign in to continue to your authorized university and club workspaces.",
+    "signUpDescription": "Use your university email to start your secure club workspace.",
+    "fullName": "Full name",
+    "fullNamePlaceholder": "Your name",
+    "email": "University email",
+    "emailPlaceholder": "you@university.edu",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "passwordHint": "At least 10 characters.",
+    "signIn": "Sign in",
+    "signUp": "Create account",
+    "signingIn": "Signing in…",
+    "signingUp": "Creating account…",
+    "newUser": "New to Club ERP?",
+    "existingUser": "Already have an account?",
+    "confirmationError": "The confirmation link is invalid or expired. Request a new link and try again.",
+    "secureByDesign": "Secure by design",
+    "asideTitle": "One trusted workspace for every club, team, event, and decision.",
+    "asideDescription": "Access is scoped by university and club, enforced on the server and inside PostgreSQL—not just hidden in the interface.",
+    "productName": "University Club ERP & Design Platform",
+    "errors": {
+      "checkFields": "Check the highlighted fields.",
+      "displayNameInvalid": "Enter a name between 2 and 120 characters.",
+      "emailInvalid": "Enter a valid email address.",
+      "passwordInvalid": "Use a password between 10 and 128 characters.",
+      "invalidCredentials": "The email or password is incorrect, or the account is unavailable.",
+      "signUpFailed": "We could not create the account. Try again in a moment."
+    },
+    "confirmationSent": "Check your inbox to confirm your email before signing in."
+  },
+  "Dashboard": {
+    "title": "Workspace",
+    "signOut": "Sign out",
+    "eyebrow": "Protected workspace",
+    "heading": "Your operating space is being prepared.",
+    "description": "Your identity has been verified. University and club navigation will appear here only after the database assigns an active scoped role.",
+    "moduleDescription": "Access appears when your scoped permissions allow it.",
+    "modules": {
+      "universities": "University administration",
+      "clubs": "Club workspaces",
+      "memberships": "Memberships",
+      "events": "Events and attendance",
+      "finance": "Finance and assets",
+      "design": "Design Studio"
+    }
+  },
+  "Common": {
+    "brandSubtitle": "University club operations",
+    "signedInMember": "Signed-in member"
+  }
+}

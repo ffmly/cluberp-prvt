@@ -6,10 +6,24 @@ import { signInAction, signUpAction } from "./actions";
 import { initialAuthActionState } from "./state";
 
 type AuthFormProps = {
+  copy: {
+    fullName: string;
+    fullNamePlaceholder: string;
+    email: string;
+    emailPlaceholder: string;
+    password: string;
+    passwordPlaceholder: string;
+    passwordHint: string;
+    signIn: string;
+    signUp: string;
+    signingIn: string;
+    signingUp: string;
+  };
+  locale: "en" | "ar";
   mode: "sign-in" | "sign-up";
 };
 
-export function AuthForm({ mode }: AuthFormProps) {
+export function AuthForm({ copy, locale, mode }: AuthFormProps) {
   const isSignUp = mode === "sign-up";
   const action = isSignUp ? signUpAction : signInAction;
   const [state, formAction, isPending] = useActionState(
@@ -18,21 +32,22 @@ export function AuthForm({ mode }: AuthFormProps) {
   );
   const submitLabel = isPending
     ? isSignUp
-      ? "Creating account…"
-      : "Signing in…"
+      ? copy.signingUp
+      : copy.signingIn
     : isSignUp
-      ? "Create account"
-      : "Sign in";
+      ? copy.signUp
+      : copy.signIn;
 
   return (
     <form action={formAction} className="mt-8 space-y-5" noValidate>
+      <input name="locale" type="hidden" value={locale} />
       {isSignUp ? (
         <Field
           autoComplete="name"
           error={state.fieldErrors?.displayName}
-          label="Full name"
+          label={copy.fullName}
           name="displayName"
-          placeholder="Your name"
+          placeholder={copy.fullNamePlaceholder}
           type="text"
         />
       ) : null}
@@ -40,19 +55,19 @@ export function AuthForm({ mode }: AuthFormProps) {
       <Field
         autoComplete="email"
         error={state.fieldErrors?.email}
-        label="University email"
+        label={copy.email}
         name="email"
-        placeholder="you@university.edu"
+        placeholder={copy.emailPlaceholder}
         type="email"
       />
 
       <Field
         autoComplete={isSignUp ? "new-password" : "current-password"}
         error={state.fieldErrors?.password}
-        hint={isSignUp ? "At least 10 characters." : undefined}
-        label="Password"
+        hint={isSignUp ? copy.passwordHint : undefined}
+        label={copy.password}
         name="password"
-        placeholder="Enter your password"
+        placeholder={copy.passwordPlaceholder}
         type="password"
       />
 
