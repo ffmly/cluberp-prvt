@@ -6,7 +6,7 @@ The product and architecture source of truth is [`docs/PROJECT_MASTER_PLAN.md`](
 
 ## Current status
 
-The repository is in Phase 1 (technical foundation). The Next.js baseline is operational; Supabase authentication, migrations, RLS, and the application shell are the next implementation milestones.
+The repository is in Phase 1 (technical foundation). The Next.js baseline, Supabase SSR boundary, email/password auth UI, and initial identity/organization migration are implemented. Live local Auth and RLS verification are pending recovery of the local Docker engine.
 
 ## Requirements
 

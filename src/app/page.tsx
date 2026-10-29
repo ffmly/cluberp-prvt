@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const foundationQualities = [
   ["Tenant isolation", "University and club scoped"],
   ["Secure by default", "PostgreSQL RLS enforced"],
@@ -48,6 +50,21 @@ export default function Home() {
               finances, teams, documents, reporting, and controlled creative
               work.
             </p>
+
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <Link
+                className="inline-flex h-12 items-center justify-center rounded-xl bg-[var(--brand-strong)] px-6 text-sm font-semibold text-white shadow-lg shadow-teal-950/10 transition hover:bg-teal-800"
+                href="/login"
+              >
+                Sign in
+              </Link>
+              <Link
+                className="inline-flex h-12 items-center justify-center rounded-xl border border-[var(--border-subtle)] bg-white/70 px-6 text-sm font-semibold text-[var(--text-strong)] transition hover:bg-white"
+                href="/login?mode=sign-up"
+              >
+                Create account
+              </Link>
+            </div>
 
             <dl className="mt-12 grid max-w-2xl gap-4 sm:grid-cols-3">
               {foundationQualities.map(([term, description]) => (

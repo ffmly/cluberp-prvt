@@ -629,7 +629,7 @@ CI on pull/push installs with the lockfile, validates formatting/lint/types/test
 - [x] Add environment validation and `.env.example`.
 - [x] Initialize local Supabase configuration and document CLI/Docker prerequisites.
 - [x] Add SSR browser/server clients and session refresh boundary.
-- [ ] Add authentication pages/actions and protected shell.
+- [ ] Add authentication pages/actions and protected shell (implemented; live Auth verification remains pending Docker recovery).
 - [ ] Create initial organization/profile/authorization migrations (identity/organization migration authored; local execution is pending Docker recovery).
 - [ ] Add generated database type workflow.
 - [ ] Add grants, RLS, pgTAP tests, and seed permissions/roles.
@@ -717,6 +717,7 @@ A feature is done only when its data model/constraints, server validation, autho
 | --- | --- | --- |
 | 2026-10-29 | Modular monolith on Next.js App Router | Appropriate for a solo developer; keeps transactions and deployment simple. |
 | 2026-10-29 | Pin Node.js 24 for local and CI runtime | Matches the verified local toolchain and current supported Next.js runtime. |
+| 2026-10-29 | Authenticated and query-dependent routes opt out of instant-navigation validation initially | Next.js 16 Cache Components cannot prerender verified cookie state; `instant = false` keeps these routes correct until their request-time UI is split behind Suspense boundaries. |
 | 2026-10-29 | PostgreSQL/Supabase migrations are schema truth | Reproducibility and reviewability; avoids dashboard drift. |
 | 2026-10-29 | Cookie SSR uses `@supabase/ssr` | Current official Supabase guidance for Next.js cookie sessions. |
 | 2026-10-29 | Database-current assignment rows, not JWT role arrays, drive authorization | Immediate revocation and no user-metadata trust. |
