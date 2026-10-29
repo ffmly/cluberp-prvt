@@ -629,10 +629,10 @@ CI on pull/push installs with the lockfile, validates formatting/lint/types/test
 - [x] Add environment validation and `.env.example`.
 - [x] Initialize local Supabase configuration and document CLI/Docker prerequisites.
 - [x] Add SSR browser/server clients and session refresh boundary.
-- [ ] Add authentication pages/actions and protected shell (implemented; live Auth verification remains pending Docker recovery).
-- [ ] Create initial organization/profile/authorization migrations (identity/organization migration authored; local execution is pending Docker recovery).
+- [x] Add authentication pages/actions and protected shell.
+- [x] Create initial organization/profile/authorization migrations.
 - [ ] Add generated database type workflow.
-- [ ] Add grants, RLS, pgTAP tests, and seed permissions/roles.
+- [x] Add grants, RLS, pgTAP tests, and seed permissions/roles.
 - [ ] Add locale routing, English/Arabic dictionaries, base design system, and accessible shell.
 - [ ] Configure Vitest, Testing Library, Playwright, and CI.
 
@@ -701,7 +701,7 @@ A feature is done only when its data model/constraints, server validation, autho
 | Item | Status / mitigation |
 | --- | --- |
 | Supabase project and plan | Not provided. Develop locally; production auth, backups, PITR, email and limits require project configuration. |
-| Docker/Supabase CLI | CLI 2.122.0 is pinned and Docker Desktop is installed. Local execution is currently blocked because Docker Desktop 4.89.0 crashes on a stale `sailor-ingest.sock` runtime socket that Windows cannot move after shutdown. Migration/RLS tests remain explicitly unverified until Docker is repaired or another PostgreSQL environment is supplied. |
+| Docker/Supabase CLI | CLI 2.122.0 is pinned. Docker Desktop 4.89.0 is running, the local stack rebuilds cleanly from migrations, and the database test suite passes. If the earlier `sailor-ingest.sock` startup failure returns, stop Docker/WSL before repairing the user-local runtime socket. |
 | Cloudinary account | Credentials and product settings not provided. Implement adapter/tests; verify signed upload/delivery with a real environment before claiming completion. |
 | Canva eligibility/review | Unknown. Keep optional and feature-flagged; native workflow is the functional baseline. |
 | Email domain/provider | Unknown. In-app notifications work independently; do not claim email delivery. |
@@ -723,6 +723,7 @@ A feature is done only when its data model/constraints, server validation, autho
 | 2026-10-29 | Database-current assignment rows, not JWT role arrays, drive authorization | Immediate revocation and no user-metadata trust. |
 | 2026-10-29 | Separate scope assignment/grant tables | Preserves foreign keys and avoids fragile polymorphic relations. |
 | 2026-10-29 | Explicit grants plus per-operation RLS and pgTAP tests | RLS alone does not define table privileges; negative tests are required. |
+| 2026-10-29 | RBAC roles may contain permissions at the same or a descendant scope only | A platform role can govern all scopes, while university, club, and team roles cannot escalate above their ownership boundary. Database triggers enforce the rule. |
 | 2026-10-29 | Native structured Design Studio is baseline; Canva is optional | Canva external and in-Canva APIs have eligibility/review/product boundaries and do not guarantee embedded ERP editing. |
 | 2026-10-29 | Cloudinary private content uses signed restricted delivery | Unguessable public URLs are not authorization. |
 | 2026-10-29 | In-app notifications first | Avoids pretending an unconfigured email provider is operational. |
