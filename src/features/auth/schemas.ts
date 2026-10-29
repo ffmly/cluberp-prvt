@@ -1,9 +1,10 @@
 import { z } from "zod";
 
 const emailSchema = z
-  .email("Enter a valid email address.")
+  .string()
   .trim()
-  .toLowerCase();
+  .toLowerCase()
+  .email("Enter a valid email address.");
 
 const passwordSchema = z
   .string()

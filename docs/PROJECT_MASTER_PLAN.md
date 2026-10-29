@@ -634,7 +634,7 @@ CI on pull/push installs with the lockfile, validates formatting/lint/types/test
 - [x] Add generated database type workflow.
 - [x] Add grants, RLS, pgTAP tests, and seed permissions/roles.
 - [x] Add locale routing, English/Arabic dictionaries, base design system, and accessible shell.
-- [ ] Configure Vitest, Testing Library, Playwright, and CI.
+- [x] Configure Vitest, Testing Library, Playwright, and CI.
 
 ### Phase 2 — Global and university administration
 
