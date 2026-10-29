@@ -1,6 +1,6 @@
 # University Club ERP & Design Platform — Master Plan
 
-**Status:** Initial architecture baseline  
+**Status:** Phase 2 in progress — platform and university administration operational<br>
 **Last updated:** 2026-10-29  
 **Owners:** Project owner and a single implementing developer  
 **Source specification:** [`project.md`](../project.md)  
@@ -614,6 +614,19 @@ CI on pull/push installs with the lockfile, validates formatting/lint/types/test
 
 ## 23. Implementation roadmap
 
+**Current milestone:** Phase 2 — Global and university administration
+
+**Delivered on `main`:** secure platform dashboard, bilingual university create/read/update/archive workflows, campus/faculty/department management, database-enforced scoped authorization, and an authenticated browser path covering university → campus → faculty → department.
+
+**Verification baseline:** 17 unit/schema tests, 50 pgTAP database tests, 5 Playwright flows, database lint, TypeScript, ESLint, and the production build pass locally and in GitHub Actions.
+
+The next implementation sequence is:
+
+1. University staff assignment management and an authorized user directory.
+2. User status/suspension workflows and privileged-action audit events.
+3. Permission/role administration with escalation protection.
+4. Club creation and renewal requests with review transitions.
+
 ### Phase 0 — Repository and planning
 
 - [x] Inspect repository and establish greenfield baseline.
@@ -638,8 +651,9 @@ CI on pull/push installs with the lockfile, validates formatting/lint/types/test
 
 ### Phase 2 — Global and university administration
 
-- [ ] Platform dashboard and university CRUD.
-- [ ] Organizational units and university staff assignments (database model, grants, RLS, and pgTAP complete; management UI remains).
+- [x] Platform dashboard and bilingual university create/read/update/archive management.
+- [x] Campus, faculty, and department database model, grants, RLS, pgTAP coverage, and management UI.
+- [ ] University staff assignment management UI and authorized user lookup (database model, grants, RLS, and pgTAP coverage complete).
 - [ ] Permission/role administration with escalation protection.
 - [ ] Club creation/renewal requests and approval workflows.
 - [ ] User status/suspension workflows and audit viewer.
