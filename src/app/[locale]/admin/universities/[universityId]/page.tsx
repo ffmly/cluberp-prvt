@@ -142,6 +142,12 @@ export default async function UniversityOrganizationPage({
         <p className="mt-4 max-w-3xl text-lg leading-8 text-[var(--text-muted)]">
           {t("description")}
         </p>
+        <Link
+          className="mt-6 inline-flex min-h-11 items-center rounded-xl border border-teal-200 bg-teal-50 px-4 py-2 text-sm font-semibold text-teal-800 transition hover:bg-teal-100"
+          href={`/admin/universities/${university.id}/staff`}
+        >
+          {t("manageStaff")}
+        </Link>
       </section>
 
       {hasLoadError ? (

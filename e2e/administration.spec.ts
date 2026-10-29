@@ -82,4 +82,52 @@ test("platform manager creates a university through the protected workflow", asy
     .getByRole("button", { name: "Create department" })
     .click();
   await expect(page.getByRole("heading", { name: departmentName })).toBeVisible();
+
+  await page.getByRole("link", { name: "Manage university staff" }).click();
+  await expect(page).toHaveURL(
+    /\/en\/admin\/universities\/[0-9a-f-]+\/staff$/,
+  );
+  await expect(
+    page.getByRole("heading", { name: universityName }),
+  ).toBeVisible();
+
+  const createAssignmentSection = page.locator("section").filter({
+    has: page.getByRole("heading", { name: "Create a staff assignment" }),
+  });
+  await createAssignmentSection
+    .getByLabel("Registered user email")
+    .fill("staff-candidate@example.test");
+  await createAssignmentSection
+    .getByLabel("Assignment scope")
+    .selectOption("department");
+  await createAssignmentSection
+    .getByLabel("Department")
+    .selectOption({ label: departmentName });
+  await createAssignmentSection
+    .getByLabel("Staff function")
+    .selectOption("supervisor");
+  await createAssignmentSection
+    .getByLabel("Position title")
+    .fill("Department Supervisor");
+  await createAssignmentSection
+    .getByRole("button", { name: "Create assignment" })
+    .click();
+
+  await expect(
+    page.getByText("Staff assignment created successfully."),
+  ).toBeVisible();
+  const assignmentCard = page.locator("article").filter({
+    has: page.getByRole("heading", { name: "E2E Staff Candidate" }),
+  });
+  await expect(assignmentCard.getByText("staff-candidate@example.test")).toBeVisible();
+  await expect(assignmentCard.getByText(departmentName)).toBeVisible();
+  await assignmentCard.getByText("Edit assignment").click();
+  await assignmentCard.getByLabel("Assignment status").selectOption("suspended");
+  await assignmentCard.getByRole("button", { name: "Save assignment" }).click();
+  await expect(
+    page.getByText("Staff assignment updated successfully."),
+  ).toBeVisible();
+  await expect(
+    assignmentCard.locator("span").filter({ hasText: /^Suspended$/ }),
+  ).toBeVisible();
 });

@@ -1,7 +1,7 @@
 # University Club ERP & Design Platform — Master Plan
 
 **Status:** Phase 2 in progress — platform and university administration operational<br>
-**Last updated:** 2026-10-29  
+**Last updated:** 2026-10-30<br>
 **Owners:** Project owner and a single implementing developer  
 **Source specification:** [`project.md`](../project.md)  
 
@@ -616,16 +616,15 @@ CI on pull/push installs with the lockfile, validates formatting/lint/types/test
 
 **Current milestone:** Phase 2 — Global and university administration
 
-**Delivered on `main`:** secure platform dashboard, bilingual university create/read/update/archive workflows, campus/faculty/department management, database-enforced scoped authorization, and an authenticated browser path covering university → campus → faculty → department.
+**Delivered on `main`:** secure platform dashboard, bilingual university create/read/update/archive workflows, campus/faculty/department management, secure university staff lookup and assignment management, database-enforced scoped authorization, and an authenticated browser path covering university → campus → faculty → department → staff assignment and suspension.
 
-**Verification baseline:** 17 unit/schema tests, 50 pgTAP database tests, 5 Playwright flows, database lint, TypeScript, ESLint, and the production build pass locally and in GitHub Actions.
+**Verification baseline:** 20 unit/schema tests, 60 pgTAP database tests, 5 Playwright flows, database lint, security advisors, TypeScript, ESLint, and the production build pass locally. The delivered baseline also passes GitHub Actions; every new milestone must restore that full green baseline before completion.
 
 The next implementation sequence is:
 
-1. University staff assignment management and an authorized user directory.
-2. User status/suspension workflows and privileged-action audit events.
-3. Permission/role administration with escalation protection.
-4. Club creation and renewal requests with review transitions.
+1. User status/suspension workflows and privileged-action audit events.
+2. Permission/role administration with escalation protection.
+3. Club creation and renewal requests with review transitions.
 
 ### Phase 0 — Repository and planning
 
@@ -653,7 +652,7 @@ The next implementation sequence is:
 
 - [x] Platform dashboard and bilingual university create/read/update/archive management.
 - [x] Campus, faculty, and department database model, grants, RLS, pgTAP coverage, and management UI.
-- [ ] University staff assignment management UI and authorized user lookup (database model, grants, RLS, and pgTAP coverage complete).
+- [x] University staff assignment management UI and exact-match authorized user lookup, with database grants, RLS, pgTAP, schema, and authenticated browser coverage.
 - [ ] Permission/role administration with escalation protection.
 - [ ] Club creation/renewal requests and approval workflows.
 - [ ] User status/suspension workflows and audit viewer.

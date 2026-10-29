@@ -169,6 +169,7 @@
     "eyebrow": "Organizational hierarchy",
     "description": "Manage campuses, faculties, and departments inside this university. Parent relationships and tenant boundaries are enforced in the database.",
     "backToUniversities": "← Back to universities",
+    "manageStaff": "Manage university staff",
     "createTitle": "Add organizational units",
     "createDescription": "Create parent units first: a campus before its faculties, and a faculty before its departments.",
     "edit": "Edit unit",
@@ -226,6 +227,72 @@
       "notAuthorized": "You no longer have permission to manage this university structure.",
       "codeTaken": "That unit code is already used in this university.",
       "saveFailed": "The organizational unit could not be saved. Try again in a moment."
+    }
+  },
+  "UniversityStaff": {
+    "title": "University staff management",
+    "eyebrow": "Staff assignments",
+    "description": "Assign registered users to university or organizational scopes without exposing the wider user directory. Access and tenant boundaries are enforced in the database.",
+    "backToOrganization": "← Back to university organization",
+    "newTitle": "Create a staff assignment",
+    "newDescription": "Use the exact email address of an existing registered user, then choose their operational scope and staff function.",
+    "existingTitle": "Current staff assignments",
+    "empty": "No staff assignments have been created for this university yet.",
+    "count": "{count, plural, =0 {No assignments} =1 {1 assignment} other {# assignments}}",
+    "edit": "Edit assignment",
+    "loadError": "Some staff data could not be loaded. Try again in a moment.",
+    "created": "Staff assignment created successfully.",
+    "updated": "Staff assignment updated successfully.",
+    "scopeLabel": "Scope",
+    "staffTypeLabel": "Staff function",
+    "titleLabel": "Position title",
+    "scopeTypes": {
+      "university": "Entire university",
+      "campus": "Campus",
+      "faculty": "Faculty",
+      "department": "Department"
+    },
+    "staffTypes": {
+      "administrator": "Administrator",
+      "supervisor": "Supervisor",
+      "reviewer": "Reviewer",
+      "other": "Other"
+    },
+    "statuses": {
+      "invited": "Invited",
+      "active": "Active",
+      "suspended": "Suspended",
+      "ended": "Ended"
+    },
+    "form": {
+      "email": "Registered user email",
+      "emailPlaceholder": "staff@university.edu",
+      "emailHint": "Enter the exact email address. Partial user searches are not allowed.",
+      "scope": "Assignment scope",
+      "selectScope": "Select a unit",
+      "noScopeOptions": "Create an organizational unit of this type before assigning staff to it.",
+      "staffType": "Staff function",
+      "title": "Position title",
+      "titlePlaceholder": "Optional official title",
+      "status": "Assignment status",
+      "create": "Create assignment",
+      "creating": "Creating…",
+      "save": "Save assignment",
+      "saving": "Saving…"
+    },
+    "errors": {
+      "checkFields": "Check the highlighted fields.",
+      "emailInvalid": "Enter a valid registered email address.",
+      "scopeRequired": "Select a unit for this assignment scope.",
+      "scopeInvalid": "Choose a valid assignment scope.",
+      "staffTypeInvalid": "Choose a valid staff function.",
+      "statusInvalid": "Choose a valid assignment status.",
+      "titleInvalid": "Use between 2 and 160 characters, or leave the title empty.",
+      "sessionExpired": "Your session expired. Sign in and try again.",
+      "notAuthorized": "You no longer have permission to manage university staff.",
+      "userNotFound": "No registered user matches that exact email address.",
+      "duplicateAssignment": "This user already has a current assignment with the same scope and staff function.",
+      "saveFailed": "The staff assignment could not be saved. Try again in a moment."
     }
   },
   "Common": {
