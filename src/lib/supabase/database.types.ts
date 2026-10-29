@@ -5,7 +5,39 @@ export type Database = {
   
   "public": {
           Tables: {
-            "campuses": {
+            "audit_events": {
+                  Row: {
+                    "action": string,"actor_id": string,"after_state": NonNullable<Json>,"before_state": NonNullable<Json>,"club_id": string | null,"created_at": string,"id": string,"metadata": NonNullable<Json>,"resource_id": string | null,"resource_type": string,"university_id": string | null
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "action": string,"actor_id": string,"after_state"?: NonNullable<Json>,"before_state"?: NonNullable<Json>,"club_id"?: string | null,"created_at"?: string,"id"?: string,"metadata"?: NonNullable<Json>,"resource_id"?: string | null,"resource_type": string,"university_id"?: string | null
+                  }
+                  Update: {
+                    "action"?: string,"actor_id"?: string,"after_state"?: NonNullable<Json>,"before_state"?: NonNullable<Json>,"club_id"?: string | null,"created_at"?: string,"id"?: string,"metadata"?: NonNullable<Json>,"resource_id"?: string | null,"resource_type"?: string,"university_id"?: string | null
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "audit_events_actor_id_fkey"
+      columns: ["actor_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "audit_events_club_id_fkey"
+      columns: ["club_id"]
+isOneToOne: false
+      referencedRelation: "clubs"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "audit_events_university_id_fkey"
+      columns: ["university_id"]
+isOneToOne: false
+      referencedRelation: "universities"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"campuses": {
                   Row: {
                     "address": string | null,"archived_at": string | null,"code": string,"created_at": string,"created_by": string,"id": string,"name": string,"status": string,"university_id": string,"updated_at": string
                   }
@@ -219,17 +251,23 @@ isOneToOne: false
                   ]
                 },"profiles": {
                   Row: {
-                    "created_at": string,"display_name": string,"id": string,"locale": string,"onboarding_completed": boolean,"time_zone": string,"updated_at": string
+                    "account_status": string,"created_at": string,"display_name": string,"id": string,"locale": string,"onboarding_completed": boolean,"suspended_at": string | null,"suspended_by": string | null,"suspension_reason": string | null,"time_zone": string,"updated_at": string
                   }
                   ComputedFields: never
                   Insert: {
-                    "created_at"?: string,"display_name": string,"id": string,"locale"?: string,"onboarding_completed"?: boolean,"time_zone"?: string,"updated_at"?: string
+                    "account_status"?: string,"created_at"?: string,"display_name": string,"id": string,"locale"?: string,"onboarding_completed"?: boolean,"suspended_at"?: string | null,"suspended_by"?: string | null,"suspension_reason"?: string | null,"time_zone"?: string,"updated_at"?: string
                   }
                   Update: {
-                    "created_at"?: string,"display_name"?: string,"id"?: string,"locale"?: string,"onboarding_completed"?: boolean,"time_zone"?: string,"updated_at"?: string
+                    "account_status"?: string,"created_at"?: string,"display_name"?: string,"id"?: string,"locale"?: string,"onboarding_completed"?: boolean,"suspended_at"?: string | null,"suspended_by"?: string | null,"suspension_reason"?: string | null,"time_zone"?: string,"updated_at"?: string
                   }
                   Relationships: [
-                    
+                    {
+      foreignKeyName: "profiles_suspended_by_fkey"
+      columns: ["suspended_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    }
                   ]
                 },"role_permissions": {
                   Row: {
@@ -494,6 +532,16 @@ isOneToOne: false
             "current_user_has_permission":
 { Args: { "permission_key": string,"scope_id"?: string,"scope_type": string }; Returns: boolean
                            },
+"list_platform_audit_events":
+{ Args: { "page_limit"?: number }; Returns: {
+              "action": string,"actor_email": string,"actor_id": string,"actor_name": string,"after_state": Json,"before_state": Json,"created_at": string,"event_id": string,"metadata": Json,"resource_id": string,"resource_type": string
+            }[]
+                           },
+"list_platform_users":
+{ Args: { "page_limit"?: number,"page_offset"?: number,"search_query"?: string }; Returns: {
+              "account_status": string,"created_at": string,"display_name": string,"email": string,"last_sign_in_at": string,"suspended_at": string,"suspension_reason": string,"user_id": string
+            }[]
+                           },
 "list_university_staff":
 { Args: { "target_university_id": string }; Returns: {
               "assignment_id": string,"display_name": string,"email": string,"ends_at": string,"scope_id": string,"scope_type": string,"staff_type": string,"starts_at": string,"status": string,"title": string,"updated_at": string,"user_id": string
@@ -503,6 +551,9 @@ isOneToOne: false
 { Args: { "email_query": string,"target_university_id": string }; Returns: {
               "display_name": string,"email": string,"user_id": string
             }[]
+                           },
+"set_user_account_status":
+{ Args: { "new_status": string,"reason": string,"target_user_id": string }; Returns: string
                            }
           }
           Enums: {
