@@ -98,7 +98,7 @@ Versions are pinned in `package.json` and the lockfile when the application is s
 
 | Concern | Decision |
 | --- | --- |
-| Application | Next.js App Router, React, TypeScript, Node.js 22 LTS |
+| Application | Next.js App Router, React, TypeScript, Node.js 24 |
 | Styling | Tailwind CSS plus CSS variables and logical properties |
 | UI primitives | shadcn/ui patterns backed by Radix primitives; components live in the repository |
 | Database/Auth | PostgreSQL and Supabase Auth/Data API/RLS; Supabase CLI migrations are authoritative |
@@ -621,11 +621,11 @@ CI on pull/push installs with the lockfile, validates formatting/lint/types/test
 - [x] Define initial architecture, tenancy, database, API, auth, RLS, media, security, and test decisions.
 - [x] Verify current Supabase, Cloudinary, and Canva integration guidance.
 - [x] Create this master plan.
-- [ ] Initialize Git history and push the plan milestone.
+- [x] Initialize Git history and push the plan milestone.
 
 ### Phase 1 — Technical foundation
 
-- [ ] Scaffold Next.js App Router with strict TypeScript, Tailwind, ESLint, and pinned lockfile.
+- [x] Scaffold Next.js App Router with strict TypeScript, Tailwind, ESLint, and pinned lockfile.
 - [ ] Add environment validation and `.env.example`.
 - [ ] Initialize local Supabase configuration and document CLI/Docker prerequisites.
 - [ ] Add SSR browser/server clients and session refresh boundary.
@@ -716,6 +716,7 @@ A feature is done only when its data model/constraints, server validation, autho
 | Date | Decision | Reason |
 | --- | --- | --- |
 | 2026-10-29 | Modular monolith on Next.js App Router | Appropriate for a solo developer; keeps transactions and deployment simple. |
+| 2026-10-29 | Pin Node.js 24 for local and CI runtime | Matches the verified local toolchain and current supported Next.js runtime. |
 | 2026-10-29 | PostgreSQL/Supabase migrations are schema truth | Reproducibility and reviewability; avoids dashboard drift. |
 | 2026-10-29 | Cookie SSR uses `@supabase/ssr` | Current official Supabase guidance for Next.js cookie sessions. |
 | 2026-10-29 | Database-current assignment rows, not JWT role arrays, drive authorization | Immediate revocation and no user-metadata trust. |
