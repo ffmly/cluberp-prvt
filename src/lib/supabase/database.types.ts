@@ -529,12 +529,33 @@ isOneToOne: false
             [_ in never]: never
           }
           Functions: {
-            "current_user_has_permission":
+            "archive_platform_role":
+{ Args: { "reason": string,"target_role_id": string }; Returns: string
+                           },
+"assign_platform_role":
+{ Args: { "target_role_id": string,"target_user_id": string }; Returns: string
+                           },
+"current_user_has_permission":
 { Args: { "permission_key": string,"scope_id"?: string,"scope_type": string }; Returns: boolean
+                           },
+"list_grantable_platform_permissions":
+{ Args: Record<PropertyKey, never>; Returns: {
+              "description": string,"permission_key": string,"permission_name": string,"scope_type": string
+            }[]
                            },
 "list_platform_audit_events":
 { Args: { "page_limit"?: number }; Returns: {
               "action": string,"actor_email": string,"actor_id": string,"actor_name": string,"after_state": Json,"before_state": Json,"created_at": string,"event_id": string,"metadata": Json,"resource_id": string,"resource_type": string
+            }[]
+                           },
+"list_platform_role_assignments":
+{ Args: Record<PropertyKey, never>; Returns: {
+              "assignment_id": string,"role_id": string,"role_name": string,"starts_at": string,"user_email": string,"user_id": string,"user_name": string
+            }[]
+                           },
+"list_platform_roles":
+{ Args: Record<PropertyKey, never>; Returns: {
+              "active_assignment_count": number,"archived_at": string,"description": string,"is_system": boolean,"permission_keys": (string)[],"role_id": string,"role_key": string,"role_name": string
             }[]
                            },
 "list_platform_users":
@@ -551,6 +572,12 @@ isOneToOne: false
 { Args: { "email_query": string,"target_university_id": string }; Returns: {
               "display_name": string,"email": string,"user_id": string
             }[]
+                           },
+"revoke_platform_role_assignment":
+{ Args: { "reason": string,"target_assignment_id": string }; Returns: string
+                           },
+"save_platform_role":
+{ Args: { "requested_permission_keys": (string)[],"role_description": string,"role_key": string,"role_name": string,"target_role_id": string }; Returns: string
                            },
 "set_user_account_status":
 { Args: { "new_status": string,"reason": string,"target_user_id": string }; Returns: string
