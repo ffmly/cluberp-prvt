@@ -117,6 +117,7 @@
     "newUniversityDescription": "New universities start in draft unless you explicitly activate them.",
     "existingUniversities": "Existing universities",
     "archiveNote": "Archiving replaces destructive deletion and preserves the audit trail.",
+    "manageOrganization": "Manage organization",
     "count": "{count, plural, =0 {No universities} =1 {1 university} other {# universities}}",
     "empty": "No universities have been created yet.",
     "loadError": "Universities could not be loaded. Try again in a moment.",
@@ -161,6 +162,70 @@
       "notAuthorized": "You no longer have permission to manage universities.",
       "slugTaken": "That URL slug is already in use.",
       "saveFailed": "The university could not be saved. Try again in a moment."
+    }
+  },
+  "UniversityOrganization": {
+    "title": "University organization",
+    "eyebrow": "Organizational hierarchy",
+    "description": "Manage campuses, faculties, and departments inside this university. Parent relationships and tenant boundaries are enforced in the database.",
+    "backToUniversities": "← Back to universities",
+    "createTitle": "Add organizational units",
+    "createDescription": "Create parent units first: a campus before its faculties, and a faculty before its departments.",
+    "edit": "Edit unit",
+    "loadError": "Some organizational data could not be loaded. Try again in a moment.",
+    "created": "Organizational unit created successfully.",
+    "updated": "Organizational unit changes saved.",
+    "statuses": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "archived": "Archived"
+    },
+    "campuses": {
+      "title": "Campuses",
+      "newTitle": "New campus",
+      "empty": "No campuses have been created yet."
+    },
+    "faculties": {
+      "title": "Faculties",
+      "newTitle": "New faculty",
+      "empty": "No faculties have been created yet."
+    },
+    "departments": {
+      "title": "Departments",
+      "newTitle": "New department",
+      "empty": "No departments have been created yet."
+    },
+    "form": {
+      "name": "Unit name",
+      "namePlaceholder": "Enter the official name",
+      "code": "Unit code",
+      "codeHint": "Up to 20 uppercase letters, numbers, and hyphens.",
+      "address": "Campus address",
+      "addressPlaceholder": "Optional street or location details",
+      "status": "Status",
+      "facultyParent": "Campus",
+      "departmentParent": "Faculty",
+      "campusParent": "University",
+      "selectParent": "Select a parent unit",
+      "noParents": "Create the required parent unit before adding this one.",
+      "createCampus": "Create campus",
+      "createFaculty": "Create faculty",
+      "createDepartment": "Create department",
+      "creating": "Creating…",
+      "save": "Save changes",
+      "saving": "Saving…"
+    },
+    "errors": {
+      "checkFields": "Check the highlighted fields.",
+      "nameInvalid": "Enter a name between 2 and 160 characters.",
+      "codeInvalid": "Use up to 20 uppercase letters, numbers, and hyphens.",
+      "addressInvalid": "Keep the address under 1,000 characters.",
+      "parentRequired": "Select a valid parent unit.",
+      "statusInvalid": "Choose a valid unit status.",
+      "sessionExpired": "Your session expired. Sign in and try again.",
+      "notAuthorized": "You no longer have permission to manage this university structure.",
+      "codeTaken": "That unit code is already used in this university.",
+      "saveFailed": "The organizational unit could not be saved. Try again in a moment."
     }
   },
   "Common": {

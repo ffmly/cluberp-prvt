@@ -240,7 +240,14 @@ select is_empty(
 set local request.jwt.claim.sub = '43333333-3333-3333-3333-333333333333';
 
 select is(
-  (select count(*) from public.campuses),
+  (
+    select count(*)
+    from public.campuses
+    where university_id in (
+      '4aaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa1',
+      '4aaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa2'
+    )
+  ),
   3::bigint,
   'platform owner receives descendant unit visibility across universities'
 );

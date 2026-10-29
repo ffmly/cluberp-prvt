@@ -7,6 +7,7 @@ import {
   type UniversityFormValues,
 } from "@/features/universities/university-form";
 import { isAppLocale } from "@/i18n/locales";
+import { Link } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 
 export const instant = false;
@@ -164,6 +165,12 @@ export default async function UniversitiesPage({
                           }).format(new Date(university.updated_at)),
                         })}
                       </span>
+                      <Link
+                        className="rounded-xl border border-teal-200 bg-teal-50 px-3 py-2 text-xs font-semibold text-teal-800 transition hover:bg-teal-100"
+                        href={`/admin/universities/${university.id}`}
+                      >
+                        {t("manageOrganization")}
+                      </Link>
                     </div>
                   </div>
                   <UniversityForm copy={copy} locale={locale} university={values} />
