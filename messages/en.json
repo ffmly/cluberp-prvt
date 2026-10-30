@@ -70,6 +70,7 @@
     "platformAdminTitle": "Platform administration is available",
     "platformAdminDescription": "Your active role can manage universities and their operating status.",
     "openAdministration": "Open administration",
+    "openClubRequests": "Club registration and renewals",
     "moduleDescription": "Access appears when your scoped permissions allow it.",
     "modules": {
       "universities": "University administration",
@@ -89,6 +90,7 @@
     "users": "Users",
     "audit": "Audit",
     "roles": "Roles",
+    "clubs": "Club requests",
     "workspace": "Workspace",
     "signOut": "Sign out",
     "accessDeniedEyebrow": "Restricted area",
@@ -111,8 +113,8 @@
       "archived": "Archived"
     },
     "loadError": "University metrics could not be loaded. Try again in a moment.",
-    "nextTitle": "Next in the administration roadmap",
-    "nextDescription": "University organization, staff, user access, audit history, and protected role delegation are operational. Club registration and approval is the final Phase 2 workflow."
+    "nextTitle": "Phase 2 administration is complete",
+    "nextDescription": "University, staff, users, roles, audit, and club approvals are operational. The next roadmap milestone is Phase 3 club workspaces and membership operations."
   },
   "UniversityAdministration": {
     "title": "University management",
@@ -356,6 +358,10 @@
       "roleAssigned": "Platform role assigned",
       "roleRevoked": "Platform role assignment revoked",
       "roleArchived": "Platform role archived",
+      "clubRequestSubmitted": "Club request submitted",
+      "clubRequestUnderReview": "Club request review started",
+      "clubRequestApproved": "Club request approved",
+      "clubRequestRejected": "Club request rejected",
       "other": "Privileged action recorded"
     }
   },
@@ -411,6 +417,60 @@
       "reasonInvalid": "Enter a reason between 5 and 500 characters.",
       "lifecycleFailed": "This protected role or assignment could not be changed."
     }
+  },
+  "ClubRequests": {
+    "title": "Club requests",
+    "eyebrow": "Club governance",
+    "heading": "Register or renew a university club.",
+    "description": "Submit an official club proposal or renew a club you manage, then follow the university review status here.",
+    "back": "← Back to workspace",
+    "newTitle": "Submit a request",
+    "newDescription": "The university reviewer must start review before approving or rejecting the request.",
+    "historyTitle": "Your requests",
+    "empty": "You have not submitted a club request yet.",
+    "submitted": "Club request submitted successfully.",
+    "types": { "create": "New club", "renewal": "Renewal" },
+    "statuses": { "submitted": "Submitted", "under_review": "Under review", "approved": "Approved", "rejected": "Rejected", "withdrawn": "Withdrawn" },
+    "form": {
+      "type": "Request type",
+      "university": "University",
+      "club": "Managed club",
+      "name": "Club name",
+      "slug": "Club URL slug",
+      "description": "Club purpose and activities",
+      "submit": "Submit request",
+      "submitting": "Submitting…"
+    },
+    "errors": {
+      "checkFields": "Check the request fields and required selections.",
+      "sessionExpired": "Your session expired. Sign in and try again.",
+      "duplicate": "An open request or club already uses this slug.",
+      "submitFailed": "The club request could not be submitted. Check your access and try again."
+    }
+  },
+  "ClubReview": {
+    "title": "Club request review",
+    "eyebrow": "University governance",
+    "heading": "Review club registrations and renewals.",
+    "description": "Start review before recording an approval or rejection. Submitters cannot review their own requests, and approval applies the club change atomically.",
+    "loadError": "Club requests could not be loaded.",
+    "empty": "No club requests are available for your review scopes.",
+    "university": "University",
+    "submitter": "Submitted by",
+    "type": "Request type",
+    "types": { "create": "New club", "renewal": "Renewal" },
+    "statuses": { "submitted": "Submitted", "under_review": "Under review", "approved": "Approved", "rejected": "Rejected", "withdrawn": "Withdrawn" },
+    "form": {
+      "review": "Start review",
+      "reviewing": "Starting…",
+      "reason": "Decision reason",
+      "approve": "Approve request",
+      "approving": "Approving…",
+      "reject": "Reject request",
+      "rejecting": "Rejecting…"
+    },
+    "success": { "under_review": "Review started.", "approved": "Club request approved.", "rejected": "Club request rejected." },
+    "errors": { "checkFields": "A rejection requires a reason of at least 5 characters.", "invalidTransition": "This request has already moved to another state.", "transitionFailed": "The request could not be changed. Check your review permission." }
   },
   "Common": {
     "brandSubtitle": "University club operations",

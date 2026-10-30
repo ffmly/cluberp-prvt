@@ -581,6 +581,11 @@ isOneToOne: false
               "description": string,"permission_key": string,"permission_name": string,"scope_type": string
             }[]
                            },
+"list_manageable_clubs":
+{ Args: Record<PropertyKey, never>; Returns: {
+              "club_description": string,"club_id": string,"club_name": string,"club_slug": string,"club_status": string,"university_id": string
+            }[]
+                           },
 "list_my_club_requests":
 { Args: Record<PropertyKey, never>; Returns: {
               "club_id": string,"decision_reason": string,"proposed_description": string,"proposed_name": string,"proposed_slug": string,"request_id": string,"request_type": string,"reviewed_at": string,"status": string,"submitted_at": string,"university_id": string,"university_name": string

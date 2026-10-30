@@ -1206,7 +1206,7 @@ Use the master plan to maintain an ordered, actionable checklist.
 - [x] Organizational hierarchy.
 - [x] User administration.
 - [x] Roles and permissions.
-- [ ] Club registration and approvals.
+- [x] Club registration and approvals.
 - [x] Administrative dashboards.
 
 ## Phase 3 — Club operations

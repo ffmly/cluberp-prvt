@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test.setTimeout(60_000);
+test.setTimeout(90_000);
 
 test("platform manager creates a university through the protected workflow", async ({
   page,
@@ -229,4 +229,59 @@ test("platform manager creates a university through the protected workflow", asy
   await roleCard.getByLabel("Reason").fill("E2E role retired after verification");
   await roleCard.getByRole("button", { name: "Archive role" }).click();
   await expect(roleCard.getByText("Archived", { exact: true })).toBeVisible();
+
+  await page.getByRole("button", { name: "Sign out" }).click();
+  await page.getByLabel("University email").fill("staff-candidate@example.test");
+  await page.getByLabel("Password").fill("StaffTest!2026");
+  await page.getByRole("button", { name: "Sign in" }).click();
+  await expect(page).toHaveURL(/\/en\/dashboard$/);
+  await page
+    .getByRole("link", { name: "Club registration and renewals" })
+    .click();
+  await expect(page).toHaveURL(/\/en\/dashboard\/club-requests$/);
+  await expect(
+    page.getByRole("heading", { name: "Register or renew a university club." }),
+  ).toBeVisible();
+
+  const clubName = `E2E Robotics Club ${uniqueSuffix}`;
+  const clubSlug = `e2e-robotics-club-${uniqueSuffix}`;
+  const clubRequestSection = page.locator("section").filter({
+    has: page.getByRole("heading", { name: "Submit a request" }),
+  });
+  await clubRequestSection
+    .getByLabel("University")
+    .selectOption({ label: universityName });
+  await clubRequestSection.getByLabel("Club name").fill(clubName);
+  await clubRequestSection.getByLabel("Club URL slug").fill(clubSlug);
+  await clubRequestSection
+    .getByLabel("Club purpose and activities")
+    .fill("Hands-on robotics education and collaborative projects.");
+  await clubRequestSection.getByRole("button", { name: "Submit request" }).click();
+  await expect(page.getByText("Club request submitted successfully.")).toBeVisible();
+  await expect(page.getByRole("heading", { name: clubName })).toBeVisible();
+
+  await page.getByRole("link", { name: "Back to workspace" }).click();
+  await page.getByRole("button", { name: "Sign out" }).click();
+  await page.getByLabel("University email").fill("platform-admin@example.test");
+  await page.getByLabel("Password").fill("PlatformTest!2026");
+  await page.getByRole("button", { name: "Sign in" }).click();
+  await page.getByRole("link", { name: "Open administration" }).click();
+  await page.getByRole("link", { name: "Club requests" }).click();
+
+  const clubRequestCard = page.locator("article").filter({
+    has: page.getByRole("heading", { name: clubName }),
+  });
+  await clubRequestCard.getByRole("button", { name: "Start review" }).click();
+  await expect(
+    clubRequestCard.locator("span").filter({ hasText: /^Under review$/ }),
+  ).toBeVisible();
+  await clubRequestCard
+    .getByLabel("Decision reason")
+    .fill("University governance requirements verified.");
+  await clubRequestCard
+    .getByRole("button", { name: "Approve request" })
+    .click();
+  await expect(
+    clubRequestCard.locator("span").filter({ hasText: /^Approved$/ }),
+  ).toBeVisible();
 });

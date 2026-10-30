@@ -61,7 +61,7 @@ jobs:
           DB_URL="$(echo "$STATUS_JSON" | jq -r '.DB_URL')"
           API_URL="$(echo "$STATUS_JSON" | jq -r '.API_URL')"
           PUBLISHABLE_KEY="$(echo "$STATUS_JSON" | jq -r '.PUBLISHABLE_KEY')"
-          psql "$DB_URL" --file e2e/fixtures/platform-admin.sql
+          psql -v ON_ERROR_STOP=1 "$DB_URL" --file e2e/fixtures/platform-admin.sql
           echo "NEXT_PUBLIC_SUPABASE_URL=$API_URL" >> "$GITHUB_ENV"
           echo "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=$PUBLISHABLE_KEY" >> "$GITHUB_ENV"
       - run: npx playwright install --with-deps chromium

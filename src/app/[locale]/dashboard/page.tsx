@@ -161,6 +161,10 @@ export default async function DashboardPage({
             </div>
           ) : null}
 
+          <Link className="mt-6 inline-flex min-h-11 items-center rounded-xl border border-teal-200 bg-white px-5 py-2.5 text-sm font-semibold text-teal-800" href="/dashboard/club-requests">
+            {t("openClubRequests")}
+          </Link>
+
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {moduleKeys.map((key) => (
               <div

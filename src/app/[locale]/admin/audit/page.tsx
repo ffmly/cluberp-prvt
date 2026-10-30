@@ -9,6 +9,10 @@ import { createClient } from "@/lib/supabase/server";
 export const instant = false;
 
 const auditActionKeys: Record<string, string> = {
+  "club_request.approved": "clubRequestApproved",
+  "club_request.rejected": "clubRequestRejected",
+  "club_request.submitted": "clubRequestSubmitted",
+  "club_request.under_review": "clubRequestUnderReview",
   "role.archived": "roleArchived",
   "role.assigned": "roleAssigned",
   "role.created": "roleCreated",

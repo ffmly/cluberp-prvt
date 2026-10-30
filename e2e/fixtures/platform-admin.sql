@@ -1,5 +1,3 @@
-\set ON_ERROR_STOP on
-
 insert into auth.users (
   instance_id,
   id,

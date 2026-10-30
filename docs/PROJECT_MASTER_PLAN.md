@@ -1,6 +1,6 @@
 # University Club ERP & Design Platform — Master Plan
 
-**Status:** Phase 2 in progress — platform and university administration operational<br>
+**Status:** Phase 2 complete — Phase 3 club operations is next<br>
 **Last updated:** 2026-10-30<br>
 **Owners:** Project owner and a single implementing developer  
 **Source specification:** [`project.md`](../project.md)  
@@ -614,15 +614,17 @@ CI on pull/push installs with the lockfile, validates formatting/lint/types/test
 
 ## 23. Implementation roadmap
 
-**Current milestone:** Phase 2 — Global and university administration
+**Current milestone:** Phase 2 complete — preparing Phase 3 club operations
 
-**Delivered on `main`:** secure platform dashboard, bilingual university create/read/update/archive workflows, campus/faculty/department management, secure university staff lookup and assignment management, user suspension/reactivation, custom platform role administration with escalation protection, append-only audit history, database-enforced scoped authorization, and authenticated browser coverage for the full delivered administration path.
+**Delivered on `main`:** the complete Phase 2 administration scope: platform dashboard; bilingual university lifecycle and hierarchy management; secure staff lookup and assignment; user suspension/reactivation; custom platform role administration with escalation protection; append-only audit history; and club creation/renewal requests with atomic review transitions and automatic club-president assignment. Database-enforced authorization and authenticated browser coverage span the delivered administration path.
 
-**Verification baseline:** 25 unit/schema tests, 95 pgTAP database tests, 5 Playwright flows, database lint, security advisors, TypeScript, ESLint, and the production build pass locally. The delivered baseline also passes GitHub Actions; every new milestone must restore that full green baseline before completion.
+**Verification baseline:** 28 unit/schema tests, 115 pgTAP database tests, 5 Playwright flows, database lint, security advisors, TypeScript, ESLint, and the production build pass locally. The delivered baseline also passes GitHub Actions; every new milestone must restore that full green baseline before completion.
 
 The next implementation sequence is:
 
-1. Club creation and renewal requests with review transitions.
+1. Club workspaces and active club context.
+2. Membership applications, decisions, and membership lifecycle.
+3. Student portal and member directory.
 
 ### Phase 0 — Repository and planning
 
@@ -652,7 +654,7 @@ The next implementation sequence is:
 - [x] Campus, faculty, and department database model, grants, RLS, pgTAP coverage, and management UI.
 - [x] University staff assignment management UI and exact-match authorized user lookup, with database grants, RLS, pgTAP, schema, and authenticated browser coverage.
 - [x] Custom platform role and assignment administration with system-role protection, grantor permission ceilings, audit events, pgTAP escalation tests, and authenticated browser coverage.
-- [ ] Club creation/renewal requests and approval workflows.
+- [x] Club creation/renewal requests and approval workflows with separation of duties, atomic club provisioning, creator leadership assignment, audit events, pgTAP coverage, and authenticated browser coverage.
 - [x] User status/suspension workflows and append-only audit viewer, with immediate database permission denial and authenticated browser coverage.
 
 ### Phase 3 — Club and student operations
