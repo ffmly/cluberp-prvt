@@ -177,4 +177,56 @@ test("platform manager creates a university through the protected workflow", asy
   await expect(
     suspendedUserCard.locator("span").filter({ hasText: /^Active$/ }),
   ).toBeVisible();
+
+  await page.getByRole("link", { name: "Roles" }).click();
+  await expect(page).toHaveURL(/\/en\/admin\/roles$/);
+  const roleName = `E2E User Operator ${uniqueSuffix}`;
+  const roleKey = `e2e_user_operator_${uniqueSuffix}`;
+  const newRoleSection = page.locator("section").filter({
+    has: page.getByRole("heading", { name: "Create a custom role" }),
+  });
+  await newRoleSection.getByLabel("Role key").fill(roleKey);
+  await newRoleSection.getByLabel("Role name").fill(roleName);
+  await newRoleSection
+    .getByLabel("Description")
+    .fill("E2E role lifecycle verification");
+  await newRoleSection.getByLabel("Manage platform users").check();
+  await newRoleSection.getByRole("button", { name: "Save role" }).click();
+  await expect(page.getByText("Role created successfully.")).toBeVisible();
+
+  const assignmentSection = page.locator("article").filter({
+    has: page.getByRole("heading", { name: "Assign a custom role" }),
+  });
+  await assignmentSection.getByLabel("Role name").selectOption({ label: roleName });
+  await assignmentSection
+    .getByLabel("User")
+    .selectOption({ label: "E2E Staff Candidate — staff-candidate@example.test" });
+  await assignmentSection.getByRole("button", { name: "Assign role" }).click();
+  await expect(page.getByText("Role assigned successfully.")).toBeVisible();
+
+  const roleAssignmentCard = page.locator("article").filter({
+    has: page.getByRole("heading", { name: "E2E Staff Candidate" }),
+    hasText: roleName,
+  });
+  await expect(roleAssignmentCard.getByText(roleName)).toBeVisible();
+  await roleAssignmentCard
+    .locator("summary")
+    .filter({ hasText: /^Revoke assignment$/ })
+    .click();
+  await roleAssignmentCard.getByLabel("Reason").fill("E2E role lifecycle completed");
+  await roleAssignmentCard
+    .getByRole("button", { name: "Revoke assignment" })
+    .click();
+  await expect(roleAssignmentCard).toHaveCount(0);
+
+  const roleCard = page.locator("article").filter({
+    has: page.getByRole("heading", { name: roleName }),
+  });
+  await roleCard
+    .locator("summary")
+    .filter({ hasText: /^Archive role$/ })
+    .click();
+  await roleCard.getByLabel("Reason").fill("E2E role retired after verification");
+  await roleCard.getByRole("button", { name: "Archive role" }).click();
+  await expect(roleCard.getByText("Archived", { exact: true })).toBeVisible();
 });

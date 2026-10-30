@@ -616,14 +616,13 @@ CI on pull/push installs with the lockfile, validates formatting/lint/types/test
 
 **Current milestone:** Phase 2 — Global and university administration
 
-**Delivered on `main`:** secure platform dashboard, bilingual university create/read/update/archive workflows, campus/faculty/department management, secure university staff lookup and assignment management, user suspension/reactivation with append-only audit history, database-enforced scoped authorization, and an authenticated browser path covering university → campus → faculty → department → staff assignment → user suspension/audit/reactivation.
+**Delivered on `main`:** secure platform dashboard, bilingual university create/read/update/archive workflows, campus/faculty/department management, secure university staff lookup and assignment management, user suspension/reactivation, custom platform role administration with escalation protection, append-only audit history, database-enforced scoped authorization, and authenticated browser coverage for the full delivered administration path.
 
-**Verification baseline:** 22 unit/schema tests, 77 pgTAP database tests, 5 Playwright flows, database lint, security advisors, TypeScript, ESLint, and the production build pass locally. The delivered baseline also passes GitHub Actions; every new milestone must restore that full green baseline before completion.
+**Verification baseline:** 25 unit/schema tests, 95 pgTAP database tests, 5 Playwright flows, database lint, security advisors, TypeScript, ESLint, and the production build pass locally. The delivered baseline also passes GitHub Actions; every new milestone must restore that full green baseline before completion.
 
 The next implementation sequence is:
 
-1. Permission/role administration with escalation protection.
-2. Club creation and renewal requests with review transitions.
+1. Club creation and renewal requests with review transitions.
 
 ### Phase 0 — Repository and planning
 
@@ -652,7 +651,7 @@ The next implementation sequence is:
 - [x] Platform dashboard and bilingual university create/read/update/archive management.
 - [x] Campus, faculty, and department database model, grants, RLS, pgTAP coverage, and management UI.
 - [x] University staff assignment management UI and exact-match authorized user lookup, with database grants, RLS, pgTAP, schema, and authenticated browser coverage.
-- [ ] Permission/role administration with escalation protection.
+- [x] Custom platform role and assignment administration with system-role protection, grantor permission ceilings, audit events, pgTAP escalation tests, and authenticated browser coverage.
 - [ ] Club creation/renewal requests and approval workflows.
 - [x] User status/suspension workflows and append-only audit viewer, with immediate database permission denial and authenticated browser coverage.
 

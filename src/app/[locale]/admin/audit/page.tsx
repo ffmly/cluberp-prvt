@@ -8,6 +8,16 @@ import { createClient } from "@/lib/supabase/server";
 
 export const instant = false;
 
+const auditActionKeys: Record<string, string> = {
+  "role.archived": "roleArchived",
+  "role.assigned": "roleAssigned",
+  "role.created": "roleCreated",
+  "role.revoked": "roleRevoked",
+  "role.updated": "roleUpdated",
+  "user.reactivated": "userReactivated",
+  "user.suspended": "userSuspended",
+};
+
 export async function generateMetadata({ params }: PageProps<"/[locale]/admin/audit">): Promise<Metadata> {
   const { locale } = await params;
   if (!isAppLocale(locale)) return {};
@@ -49,7 +59,7 @@ export default async function AuditPage({ params }: PageProps<"/[locale]/admin/a
               <li className="rounded-2xl border border-[var(--border-subtle)] bg-white p-5 shadow-sm" key={event.event_id}>
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                   <div>
-                    <p className="font-semibold text-[var(--text-strong)]">{t(`actions.${event.action === "user.suspended" ? "suspended" : "reactivated"}`)}</p>
+                    <p className="font-semibold text-[var(--text-strong)]">{t(`actions.${auditActionKeys[event.action] ?? "other"}`)}</p>
                     <p className="mt-1 text-sm text-[var(--text-muted)]">
                       {t("actor", { name: event.actor_name || event.actor_email })}
                     </p>

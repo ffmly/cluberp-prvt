@@ -88,6 +88,7 @@
     "universities": "Universities",
     "users": "Users",
     "audit": "Audit",
+    "roles": "Roles",
     "workspace": "Workspace",
     "signOut": "Sign out",
     "accessDeniedEyebrow": "Restricted area",
@@ -111,7 +112,7 @@
     },
     "loadError": "University metrics could not be loaded. Try again in a moment.",
     "nextTitle": "Next in the administration roadmap",
-    "nextDescription": "University organization, staff assignments, user suspension, and audit history are operational. Role and permission administration is the next protected platform workflow."
+    "nextDescription": "University organization, staff, user access, audit history, and protected role delegation are operational. Club registration and approval is the final Phase 2 workflow."
   },
   "UniversityAdministration": {
     "title": "University management",
@@ -348,8 +349,67 @@
     "actor": "Performed by {name}",
     "target": "Target: {name}",
     "actions": {
-      "suspended": "User access suspended",
-      "reactivated": "User access reactivated"
+      "userSuspended": "User access suspended",
+      "userReactivated": "User access reactivated",
+      "roleCreated": "Platform role created",
+      "roleUpdated": "Platform role updated",
+      "roleAssigned": "Platform role assigned",
+      "roleRevoked": "Platform role assignment revoked",
+      "roleArchived": "Platform role archived",
+      "other": "Privileged action recorded"
+    }
+  },
+  "RoleAdministration": {
+    "title": "Role administration",
+    "eyebrow": "Roles and permissions",
+    "heading": "Delegate access without privilege escalation.",
+    "description": "Create custom platform roles from permissions you already hold, assign them to active users, and preserve every lifecycle change in the audit log. System roles remain read-only.",
+    "loadError": "Some role administration data could not be loaded.",
+    "newRole": "Create a custom role",
+    "newRoleDescription": "At least one permission is required. You can only grant permissions available to your own account.",
+    "rolesTitle": "Platform roles",
+    "assignTitle": "Assign a custom role",
+    "assignDescription": "System roles cannot be assigned from this workflow.",
+    "assignmentsTitle": "Active custom assignments",
+    "emptyAssignments": "No active custom role assignments.",
+    "systemLabel": "System",
+    "customLabel": "Custom",
+    "archivedLabel": "Archived",
+    "assignmentCount": "{count, plural, =0 {No active assignments} =1 {1 active assignment} other {# active assignments}}",
+    "edit": "Edit role",
+    "archive": "Archive role",
+    "revoke": "Revoke assignment",
+    "created": "Role created successfully.",
+    "updated": "Role updated successfully.",
+    "assigned": "Role assigned successfully.",
+    "revoked": "Role assignment revoked.",
+    "archived": "Role archived successfully.",
+    "form": {
+      "key": "Role key",
+      "name": "Role name",
+      "description": "Description",
+      "permissions": "Granted permissions",
+      "user": "User",
+      "save": "Save role",
+      "saving": "Saving…",
+      "assign": "Assign role",
+      "assigning": "Assigning…",
+      "reason": "Reason",
+      "reasonPlaceholder": "Record why this access is changing",
+      "revoke": "Revoke assignment",
+      "revoking": "Revoking…",
+      "archive": "Archive role",
+      "archiving": "Archiving…"
+    },
+    "errors": {
+      "checkFields": "Check the role details and select at least one permission.",
+      "notAuthorized": "You no longer have permission to manage roles.",
+      "keyTaken": "That role key is already in use.",
+      "saveFailed": "The role could not be saved. Check that every permission is grantable.",
+      "duplicateAssignment": "This user already has that active role.",
+      "assignFailed": "The role could not be assigned to this user.",
+      "reasonInvalid": "Enter a reason between 5 and 500 characters.",
+      "lifecycleFailed": "This protected role or assignment could not be changed."
     }
   },
   "Common": {

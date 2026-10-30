@@ -111,6 +111,12 @@ export default async function AdminLayout({
               </Link>
               <Link
                 className="rounded-xl px-3 py-2 text-sm font-semibold text-[var(--text-muted)] transition hover:bg-slate-100 hover:text-[var(--text-strong)]"
+                href="/admin/roles"
+              >
+                {t("roles")}
+              </Link>
+              <Link
+                className="rounded-xl px-3 py-2 text-sm font-semibold text-[var(--text-muted)] transition hover:bg-slate-100 hover:text-[var(--text-strong)]"
                 href="/dashboard"
               >
                 {t("workspace")}

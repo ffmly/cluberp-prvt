@@ -205,6 +205,10 @@ select is(
     select count(*)
     from public.audit_events
     where action in ('role.created', 'role.assigned', 'role.revoked', 'role.archived')
+      and actor_id in (
+        '81111111-1111-4111-8111-111111111111',
+        '82222222-2222-4222-8222-222222222222'
+      )
   ),
   5::bigint,
   'role lifecycle changes append audit events'
