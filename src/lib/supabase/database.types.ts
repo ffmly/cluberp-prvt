@@ -63,6 +63,44 @@ isOneToOne: false
       referencedColumns: ["id"]
     }
                   ]
+                },"club_requests": {
+                  Row: {
+                    "club_id": string | null,"created_at": string,"decision_reason": string | null,"id": string,"proposed_description": string | null,"proposed_name": string,"proposed_slug": string,"request_type": string,"reviewed_at": string | null,"reviewer_id": string | null,"status": string,"submitted_at": string,"submitter_id": string,"university_id": string,"updated_at": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "club_id"?: string | null,"created_at"?: string,"decision_reason"?: string | null,"id"?: string,"proposed_description"?: string | null,"proposed_name": string,"proposed_slug": string,"request_type": string,"reviewed_at"?: string | null,"reviewer_id"?: string | null,"status"?: string,"submitted_at"?: string,"submitter_id": string,"university_id": string,"updated_at"?: string
+                  }
+                  Update: {
+                    "club_id"?: string | null,"created_at"?: string,"decision_reason"?: string | null,"id"?: string,"proposed_description"?: string | null,"proposed_name"?: string,"proposed_slug"?: string,"request_type"?: string,"reviewed_at"?: string | null,"reviewer_id"?: string | null,"status"?: string,"submitted_at"?: string,"submitter_id"?: string,"university_id"?: string,"updated_at"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "club_requests_club_id_fkey"
+      columns: ["club_id"]
+isOneToOne: false
+      referencedRelation: "clubs"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "club_requests_reviewer_id_fkey"
+      columns: ["reviewer_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "club_requests_submitter_id_fkey"
+      columns: ["submitter_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "club_requests_university_id_fkey"
+      columns: ["university_id"]
+isOneToOne: false
+      referencedRelation: "universities"
+      referencedColumns: ["id"]
+    }
+                  ]
                 },"club_role_assignments": {
                   Row: {
                     "assigned_by": string,"club_id": string,"created_at": string,"ends_at": string | null,"id": string,"revocation_reason": string | null,"revoked_at": string | null,"revoked_by": string | null,"role_id": string,"starts_at": string,"updated_at": string,"user_id": string
@@ -543,6 +581,11 @@ isOneToOne: false
               "description": string,"permission_key": string,"permission_name": string,"scope_type": string
             }[]
                            },
+"list_my_club_requests":
+{ Args: Record<PropertyKey, never>; Returns: {
+              "club_id": string,"decision_reason": string,"proposed_description": string,"proposed_name": string,"proposed_slug": string,"request_id": string,"request_type": string,"reviewed_at": string,"status": string,"submitted_at": string,"university_id": string,"university_name": string
+            }[]
+                           },
 "list_platform_audit_events":
 { Args: { "page_limit"?: number }; Returns: {
               "action": string,"actor_email": string,"actor_id": string,"actor_name": string,"after_state": Json,"before_state": Json,"created_at": string,"event_id": string,"metadata": Json,"resource_id": string,"resource_type": string
@@ -563,6 +606,11 @@ isOneToOne: false
               "account_status": string,"created_at": string,"display_name": string,"email": string,"last_sign_in_at": string,"suspended_at": string,"suspension_reason": string,"user_id": string
             }[]
                            },
+"list_reviewable_club_requests":
+{ Args: Record<PropertyKey, never>; Returns: {
+              "club_id": string,"decision_reason": string,"proposed_description": string,"proposed_name": string,"proposed_slug": string,"request_id": string,"request_type": string,"reviewed_at": string,"status": string,"submitted_at": string,"submitter_email": string,"submitter_id": string,"submitter_name": string,"university_id": string,"university_name": string
+            }[]
+                           },
 "list_university_staff":
 { Args: { "target_university_id": string }; Returns: {
               "assignment_id": string,"display_name": string,"email": string,"ends_at": string,"scope_id": string,"scope_type": string,"staff_type": string,"starts_at": string,"status": string,"title": string,"updated_at": string,"user_id": string
@@ -581,6 +629,12 @@ isOneToOne: false
                            },
 "set_user_account_status":
 { Args: { "new_status": string,"reason": string,"target_user_id": string }; Returns: string
+                           },
+"submit_club_request":
+{ Args: { "proposed_description": string,"proposed_name": string,"proposed_slug": string,"request_type": string,"target_club_id": string,"target_university_id": string }; Returns: string
+                           },
+"transition_club_request":
+{ Args: { "new_status": string,"reason": string,"target_request_id": string }; Returns: string
                            }
           }
           Enums: {
