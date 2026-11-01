@@ -75,6 +75,7 @@
     "discoverClubs": "Discover clubs",
     "myMemberships": "My memberships",
     "discoverEvents": "Discover events",
+    "notifications": "Notifications",
     "moduleDescription": "Access appears when your scoped permissions allow it.",
     "modules": {
       "universities": "University administration",
@@ -683,6 +684,35 @@
     "statuses": { "registered": "Registered", "waitlisted": "Waitlisted", "cancelled": "Cancelled", "attended": "Attended", "no_show": "No show" },
     "form": { "register": "Register", "registering": "Registering…", "cancel": "Cancel registration", "cancelling": "Cancelling…" },
     "errors": { "sessionExpired": "Your session expired. Sign in and try again.", "duplicate": "You already have a registration for this event.", "registerFailed": "Registration is closed, restricted, or no longer available.", "cancelFailed": "This registration can no longer be cancelled." }
+  },
+  "Operations": {
+    "title": "Club operations",
+    "back": "← Back to club workspace",
+    "heading": "Forms, tasks, documents, and announcements.",
+    "description": "Run daily club collaboration with scoped permissions, immutable form versions, protected file metadata, and in-app notifications.",
+    "formsTitle": "Dynamic forms",
+    "tasksTitle": "Tasks and collaboration",
+    "documentsTitle": "Documents and media metadata",
+    "documentsNote": "This stores protected metadata only. Upload delivery requires configured Cloudinary credentials and signed access.",
+    "announcementsTitle": "Announcements",
+    "statuses": { "draft": "Draft", "published": "Published", "archived": "Archived" },
+    "purposes": { "membership": "Membership", "event_registration": "Event registration", "workshop_registration": "Workshop registration", "survey": "Survey", "feedback": "Feedback", "administrative_request": "Administrative request" },
+    "taskStatuses": { "todo": "To do", "in_progress": "In progress", "blocked": "Blocked", "done": "Done", "cancelled": "Cancelled" },
+    "priorities": { "low": "Low", "medium": "Medium", "high": "High", "urgent": "Urgent" },
+    "copy": {
+      "formName": "Form name", "purpose": "Purpose", "survey": "Survey", "feedback": "Feedback", "request": "Administrative request", "membership": "Membership", "eventRegistration": "Event registration",
+      "fieldId": "Field key", "fieldLabel": "Field label", "fieldType": "Field type", "short_text": "Short text", "long_text": "Long text", "email": "Email", "phone": "Phone", "number": "Number", "single_choice": "Single choice", "multiple_choice": "Multiple choice", "dropdown": "Dropdown", "date": "Date", "consent": "Consent checkbox", "file": "Authorized file metadata", "remove": "Remove", "required": "Required", "options": "Options", "optionsHint": "Comma-separated options", "addField": "+ Add field", "saveForm": "Save form version", "publish": "Publish", "submit": "Submit response",
+      "taskTitle": "Task title", "description": "Description", "assignee": "Assignee", "unassigned": "Unassigned", "priority": "Priority", "low": "Low", "medium": "Medium", "high": "High", "urgent": "Urgent", "dueAt": "Due date", "createTask": "Create task", "status": "Status", "reason": "Reason", "update": "Update", "todo": "To do", "in_progress": "In progress", "blocked": "Blocked", "done": "Done", "cancelled": "Cancelled", "comment": "Add a comment", "add": "Add",
+      "documentTitle": "Document title", "category": "Category", "clubDocument": "Club document", "meetingMinutes": "Meeting minutes", "eventAttachment": "Event attachment", "other": "Other", "provider": "Storage provider", "external": "External protected provider", "assetId": "Provider asset ID", "mimeType": "MIME type", "sizeBytes": "Size in bytes", "visibility": "Visibility", "members": "Members", "managers": "Managers only", "addDocument": "Register metadata",
+      "announcementTitle": "Announcement title", "body": "Message", "audience": "Audience", "public": "Public", "createAnnouncement": "Create draft", "markRead": "Mark as read"
+    },
+    "success": { "formSaved": "Form version saved.", "formPublished": "Form published.", "submitted": "Response submitted against this exact version.", "taskCreated": "Task created and assignee notified.", "taskUpdated": "Task status updated.", "commentAdded": "Comment added.", "documentAdded": "Protected document metadata registered.", "announcementCreated": "Announcement draft created.", "announcementPublished": "Announcement published and members notified.", "notificationRead": "Notification marked as read." },
+    "errors": { "fields": "Check the required fields and allowed values.", "session": "Your session expired.", "save": "This protected operation could not be completed.", "submit": "The response failed server-side schema validation." }
+  },
+  "Notifications": {
+    "title": "Notifications", "back": "← Back to workspace", "heading": "Your notifications.",
+    "description": "Task assignments and club announcements addressed to your account appear here.",
+    "empty": "You have no notifications yet.", "markRead": "Mark as read", "read": "Read"
   },
   "Common": {
     "brandSubtitle": "University club operations",

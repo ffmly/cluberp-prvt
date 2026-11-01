@@ -1,0 +1,11 @@
+import { z } from "zod";
+
+export const formDefinitionSchema = z.object({ clubId: z.uuid(), formId: z.preprocess((v) => v || undefined, z.uuid().optional()), name: z.string().trim().min(3).max(160), purpose: z.enum(["membership","event_registration","workshop_registration","survey","feedback","administrative_request"]), schema: z.string().transform((value, context) => { try { return JSON.parse(value) as unknown; } catch { context.addIssue({ code: "custom", message: "Invalid schema" }); return z.NEVER; } }) });
+export const idWithClubSchema = z.object({ clubId: z.uuid(), id: z.uuid() });
+export const submissionSchema = z.object({ clubId: z.uuid(), formId: z.uuid(), answers: z.string().transform((value, context) => { try { return JSON.parse(value) as unknown; } catch { context.addIssue({ code: "custom", message: "Invalid answers" }); return z.NEVER; } }) });
+export const taskSchema = z.object({ assigneeId: z.preprocess((v) => v || undefined, z.uuid().optional()), clubId: z.uuid(), description: z.string().trim().max(5000), dueAt: z.preprocess((v) => v || undefined, z.string().datetime({ local: true }).optional()), priority: z.enum(["low","medium","high","urgent"]), title: z.string().trim().min(3).max(180) });
+export const taskTransitionSchema = z.object({ clubId: z.uuid(), reason: z.string().trim().min(3).max(500), status: z.enum(["todo","in_progress","blocked","done","cancelled"]), taskId: z.uuid() });
+export const commentSchema = z.object({ clubId: z.uuid(), body: z.string().trim().min(1).max(2000), taskId: z.uuid() });
+export const documentSchema = z.object({ assetId: z.string().trim().min(3).max(500), category: z.enum(["meeting_minutes","club_document","event_attachment","member_file","design_asset","certificate","other"]), clubId: z.uuid(), mimeType: z.string().trim().min(3).max(120), provider: z.enum(["cloudinary","external"]), sizeBytes: z.coerce.number().int().min(1).max(52_428_800), title: z.string().trim().min(2).max(180), visibility: z.enum(["members","managers"]) });
+export const announcementSchema = z.object({ audience: z.enum(["members","public"]), body: z.string().trim().min(5).max(10000), clubId: z.uuid(), title: z.string().trim().min(3).max(180) });
+export const notificationSchema = z.object({ notificationId: z.uuid() });

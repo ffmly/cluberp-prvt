@@ -75,6 +75,7 @@
     "discoverClubs": "اكتشاف الأندية",
     "myMemberships": "عضوياتي",
     "discoverEvents": "اكتشاف الفعاليات",
+    "notifications": "الإشعارات",
     "moduleDescription": "يظهر الوصول عندما تسمح به صلاحياتك محددة النطاق.",
     "modules": {
       "universities": "إدارة الجامعات",
@@ -684,6 +685,28 @@
     "form": { "register": "التسجيل", "registering": "جارٍ التسجيل…", "cancel": "إلغاء التسجيل", "cancelling": "جارٍ الإلغاء…" },
     "errors": { "sessionExpired": "انتهت الجلسة. سجل الدخول وحاول مجدداً.", "duplicate": "لديك تسجيل سابق لهذه الفعالية.", "registerFailed": "التسجيل مغلق أو مقيّد أو لم يعد متاحاً.", "cancelFailed": "لم يعد ممكناً إلغاء هذا التسجيل." }
   },
+  "Operations": {
+    "title": "عمليات النادي",
+    "back": "← العودة إلى مساحة النادي",
+    "heading": "النماذج والمهام والوثائق والإعلانات.",
+    "description": "أدر التعاون اليومي بصلاحيات محددة ونسخ نماذج ثابتة وبيانات ملفات محمية وإشعارات داخلية.",
+    "formsTitle": "النماذج الديناميكية", "tasksTitle": "المهام والتعاون", "documentsTitle": "بيانات الوثائق والوسائط",
+    "documentsNote": "يُحفظ هنا الوصف المحمي فقط. رفع الملفات وتسليمها يتطلب إعداد Cloudinary وروابط موقعة.", "announcementsTitle": "الإعلانات",
+    "statuses": { "draft": "مسودة", "published": "منشور", "archived": "مؤرشف" },
+    "purposes": { "membership": "العضوية", "event_registration": "تسجيل فعالية", "workshop_registration": "تسجيل ورشة", "survey": "استبيان", "feedback": "ملاحظات", "administrative_request": "طلب إداري" },
+    "taskStatuses": { "todo": "للإنجاز", "in_progress": "قيد التنفيذ", "blocked": "متعطل", "done": "مكتمل", "cancelled": "ملغى" },
+    "priorities": { "low": "منخفضة", "medium": "متوسطة", "high": "عالية", "urgent": "عاجلة" },
+    "copy": {
+      "formName": "اسم النموذج", "purpose": "الغرض", "survey": "استبيان", "feedback": "ملاحظات", "request": "طلب إداري", "membership": "العضوية", "eventRegistration": "تسجيل فعالية",
+      "fieldId": "مفتاح الحقل", "fieldLabel": "عنوان الحقل", "fieldType": "نوع الحقل", "short_text": "نص قصير", "long_text": "نص طويل", "email": "بريد إلكتروني", "phone": "هاتف", "number": "رقم", "single_choice": "اختيار واحد", "multiple_choice": "اختيارات متعددة", "dropdown": "قائمة", "date": "تاريخ", "consent": "موافقة", "file": "بيانات ملف مصرح", "remove": "حذف", "required": "إجباري", "options": "الخيارات", "optionsHint": "خيارات مفصولة بفواصل", "addField": "+ إضافة حقل", "saveForm": "حفظ نسخة النموذج", "publish": "نشر", "submit": "إرسال الإجابة",
+      "taskTitle": "عنوان المهمة", "description": "الوصف", "assignee": "المكلّف", "unassigned": "غير مسندة", "priority": "الأولوية", "low": "منخفضة", "medium": "متوسطة", "high": "عالية", "urgent": "عاجلة", "dueAt": "الأجل", "createTask": "إنشاء مهمة", "status": "الحالة", "reason": "السبب", "update": "تحديث", "todo": "للإنجاز", "in_progress": "قيد التنفيذ", "blocked": "متعطل", "done": "مكتمل", "cancelled": "ملغى", "comment": "إضافة تعليق", "add": "إضافة",
+      "documentTitle": "عنوان الوثيقة", "category": "التصنيف", "clubDocument": "وثيقة النادي", "meetingMinutes": "محضر اجتماع", "eventAttachment": "مرفق فعالية", "other": "أخرى", "provider": "مزود التخزين", "external": "مزود خارجي محمي", "assetId": "معرف الملف لدى المزود", "mimeType": "نوع MIME", "sizeBytes": "الحجم بالبايت", "visibility": "الظهور", "members": "الأعضاء", "managers": "المسيرون فقط", "addDocument": "تسجيل البيانات",
+      "announcementTitle": "عنوان الإعلان", "body": "الرسالة", "audience": "الجمهور", "public": "عام", "createAnnouncement": "إنشاء مسودة", "markRead": "تعليم كمقروء"
+    },
+    "success": { "formSaved": "تم حفظ نسخة النموذج.", "formPublished": "تم نشر النموذج.", "submitted": "تم إرسال الإجابة وربطها بهذه النسخة.", "taskCreated": "تم إنشاء المهمة وإشعار المكلّف.", "taskUpdated": "تم تحديث حالة المهمة.", "commentAdded": "تمت إضافة التعليق.", "documentAdded": "تم تسجيل بيانات الوثيقة المحمية.", "announcementCreated": "تم إنشاء مسودة الإعلان.", "announcementPublished": "تم نشر الإعلان وإشعار الأعضاء.", "notificationRead": "تم تعليم الإشعار كمقروء." },
+    "errors": { "fields": "راجع الحقول المطلوبة والقيم المسموحة.", "session": "انتهت الجلسة.", "save": "تعذر إكمال هذه العملية المحمية.", "submit": "فشل التحقق من الإجابات على الخادم." }
+  },
+  "Notifications": { "title": "الإشعارات", "back": "← العودة إلى مساحة العمل", "heading": "إشعاراتك.", "description": "تظهر هنا المهام المسندة إليك وإعلانات الأندية الموجهة لحسابك.", "empty": "لا توجد إشعارات بعد.", "markRead": "تعليم كمقروء", "read": "مقروء" },
   "Common": {
     "brandSubtitle": "عمليات الأندية الجامعية",
     "signedInMember": "عضو مسجّل الدخول"

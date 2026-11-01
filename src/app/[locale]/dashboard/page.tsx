@@ -178,6 +178,9 @@ export default async function DashboardPage({
           <Link className="ms-3 mt-6 inline-flex min-h-11 items-center rounded-xl border border-teal-200 bg-white px-5 py-2.5 text-sm font-semibold text-teal-800" href="/dashboard/events">
             {t("discoverEvents")}
           </Link>
+          <Link className="ms-3 mt-6 inline-flex min-h-11 items-center rounded-xl border border-teal-200 bg-white px-5 py-2.5 text-sm font-semibold text-teal-800" href="/dashboard/notifications">
+            {t("notifications")}
+          </Link>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {moduleKeys.map((key) => (

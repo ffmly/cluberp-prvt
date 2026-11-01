@@ -486,4 +486,73 @@ test("platform manager creates a university through the protected workflow", asy
   await expect(
     attendanceCard.locator("span").filter({ hasText: /^Attended$/ }),
   ).toBeVisible();
+
+  await page.getByRole("link", { name: "Back to club workspace" }).click();
+  await page.getByRole("link", { name: "Tasks" }).click();
+  await expect(page.getByRole("heading", { name: "Forms, tasks, documents, and announcements." })).toBeVisible();
+
+  const formName = `E2E Workshop Feedback ${uniqueSuffix}`;
+  const formsSection = page.locator("section").filter({
+    has: page.getByRole("heading", { name: "Dynamic forms" }),
+  });
+  await formsSection.getByLabel("Form name").fill(formName);
+  await formsSection.getByLabel("Field label").fill("Overall rating");
+  await formsSection.getByLabel("Field type").selectOption("number");
+  await formsSection.getByRole("button", { name: "Save form version" }).click();
+  const formCard = formsSection.locator("article").filter({
+    has: page.getByRole("heading", { name: formName }),
+  });
+  await expect(formCard.getByText("Draft", { exact: true })).toBeVisible();
+  await formCard.getByRole("button", { name: "Publish" }).click();
+  await expect(formCard.getByText("Published", { exact: true })).toBeVisible();
+  await formCard.getByLabel("Overall rating").fill("5");
+  await formCard.getByRole("button", { name: "Submit response" }).click();
+  await expect(page.getByText("Response submitted against this exact version.")).toBeVisible();
+
+  const taskTitle = `E2E Event Report ${uniqueSuffix}`;
+  const tasksSection = page.locator("section").filter({
+    has: page.getByRole("heading", { name: "Tasks and collaboration" }),
+  });
+  await tasksSection.getByLabel("Task title").fill(taskTitle);
+  await tasksSection.getByLabel("Description").first().fill("Prepare the event attendance summary.");
+  await tasksSection.getByLabel("Assignee").selectOption({ label: "E2E Student Member" });
+  await tasksSection.getByRole("button", { name: "Create task" }).click();
+  await expect(tasksSection.getByRole("heading", { name: taskTitle })).toBeVisible();
+
+  const documentsSection = page.locator("section").filter({
+    has: page.getByRole("heading", { name: "Documents and media metadata" }),
+  });
+  await documentsSection.getByLabel("Document title").fill("E2E Meeting Minutes");
+  await documentsSection.getByLabel("Provider asset ID").fill(`private/e2e-minutes-${uniqueSuffix}`);
+  await documentsSection.getByLabel("MIME type").fill("application/pdf");
+  await documentsSection.getByLabel("Size in bytes").fill("4096");
+  await documentsSection.getByRole("button", { name: "Register metadata" }).click();
+  await expect(documentsSection.getByRole("heading", { name: "E2E Meeting Minutes" })).toBeVisible();
+
+  const announcementTitle = `E2E Workshop Update ${uniqueSuffix}`;
+  const announcementsSection = page.locator("section").filter({
+    has: page.getByRole("heading", { name: "Announcements" }),
+  });
+  await announcementsSection.getByLabel("Announcement title").fill(announcementTitle);
+  await announcementsSection.getByLabel("Message").fill("The robotics workshop attendance report is now available.");
+  await announcementsSection.getByRole("button", { name: "Create draft" }).click();
+  const announcementCard = announcementsSection.locator("article").filter({
+    has: page.getByRole("heading", { name: announcementTitle }),
+  });
+  await announcementCard.getByRole("button", { name: "Publish" }).click();
+  await expect(announcementCard.getByText("Published", { exact: true })).toBeVisible();
+
+  await page.goto("/en/dashboard");
+  await page.getByRole("button", { name: "Sign out" }).click();
+  await page.getByLabel("University email").fill("student-member@example.test");
+  await page.getByLabel("Password").fill("StudentTest!2026");
+  await page.getByRole("button", { name: "Sign in" }).click();
+  await page.getByRole("link", { name: "Notifications" }).click();
+  await expect(page.getByRole("heading", { name: taskTitle })).toBeVisible();
+  const announcementNotification = page.locator("article").filter({
+    has: page.getByRole("heading", { name: announcementTitle }),
+  });
+  await expect(announcementNotification).toBeVisible();
+  await announcementNotification.getByRole("button", { name: "Mark as read" }).click();
+  await expect(announcementNotification.getByText("Read", { exact: true })).toBeVisible();
 });
