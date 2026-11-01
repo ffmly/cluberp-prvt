@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test.setTimeout(240_000);
+test.setTimeout(300_000);
 
 test("platform manager creates a university through the protected workflow", async ({
   page,
@@ -389,4 +389,101 @@ test("platform manager creates a university through the protected workflow", asy
       .locator("article")
       .filter({ has: page.getByRole("heading", { name: clubName }) }),
   ).toContainText("Active");
+
+  await page.goto("/en/dashboard");
+  await page.getByRole("button", { name: "Sign out" }).click();
+  await page.getByLabel("University email").fill("staff-candidate@example.test");
+  await page.getByLabel("Password").fill("StaffTest!2026");
+  await page.getByRole("button", { name: "Sign in" }).click();
+  await page.getByRole("link", { name: "Open club workspaces" }).click();
+  await page
+    .locator("article")
+    .filter({ has: page.getByRole("heading", { name: clubName }) })
+    .getByRole("link", { name: "Open workspace" })
+    .click();
+  await page.getByRole("link", { name: "Events" }).click();
+
+  const eventTitle = `E2E Robotics Workshop ${uniqueSuffix}`;
+  const eventForm = page.locator("section").filter({
+    has: page.getByRole("heading", { name: "Create an event or workshop" }),
+  });
+  await eventForm.getByLabel("Title").fill(eventTitle);
+  await eventForm.getByLabel("Location or venue").fill("E2E Innovation Lab");
+  await eventForm
+    .getByLabel("Description")
+    .fill("A protected end-to-end robotics workshop for university students.");
+  await eventForm.getByLabel("Type").selectOption("workshop");
+  await eventForm.getByLabel("Capacity (leave blank for unlimited)").fill("1");
+  await eventForm.getByLabel("Starts at").fill("2030-06-10T10:00");
+  await eventForm.getByLabel("Ends at").fill("2030-06-10T12:00");
+  await eventForm
+    .getByLabel("Registration deadline")
+    .fill("2030-06-09T18:00");
+  await eventForm.getByRole("button", { name: "Save draft" }).click();
+
+  const eventCard = page.locator("article").filter({
+    has: page.getByRole("heading", { name: eventTitle }),
+  });
+  await expect(eventCard.getByText("Draft", { exact: true })).toBeVisible();
+  await eventCard.getByRole("button", { name: "Submit for approval" }).click();
+  await expect(eventCard.getByText("Pending approval", { exact: true })).toBeVisible();
+
+  await page.goto("/en/dashboard");
+  await page.getByRole("button", { name: "Sign out" }).click();
+  await page.getByLabel("University email").fill("platform-admin@example.test");
+  await page.getByLabel("Password").fill("PlatformTest!2026");
+  await page.getByRole("button", { name: "Sign in" }).click();
+  await page.getByRole("link", { name: "Open club workspaces" }).click();
+  await page
+    .locator("article")
+    .filter({ has: page.getByRole("heading", { name: clubName }) })
+    .getByRole("link", { name: "Open workspace" })
+    .click();
+  await page.getByRole("link", { name: "Events" }).click();
+  const approvalCard = page.locator("article").filter({
+    has: page.getByRole("heading", { name: eventTitle }),
+  });
+  await approvalCard.getByRole("button", { name: "Approve and publish" }).click();
+  await expect(approvalCard.getByText("Published", { exact: true })).toBeVisible();
+
+  await page.goto("/en/dashboard");
+  await page.getByRole("button", { name: "Sign out" }).click();
+  await page.getByLabel("University email").fill("student-member@example.test");
+  await page.getByLabel("Password").fill("StudentTest!2026");
+  await page.getByRole("button", { name: "Sign in" }).click();
+  await page.getByRole("link", { name: "Discover events" }).click();
+  const publicEventCard = page.locator("article").filter({
+    has: page.getByRole("heading", { name: eventTitle }),
+  });
+  await publicEventCard.getByRole("button", { name: "Register" }).click();
+  await expect(publicEventCard.getByText("Registered", { exact: true })).toBeVisible();
+
+  await page.goto("/en/dashboard");
+  await page.getByRole("button", { name: "Sign out" }).click();
+  await page.getByLabel("University email").fill("staff-candidate@example.test");
+  await page.getByLabel("Password").fill("StaffTest!2026");
+  await page.getByRole("button", { name: "Sign in" }).click();
+  await page.getByRole("link", { name: "Open club workspaces" }).click();
+  await page
+    .locator("article")
+    .filter({ has: page.getByRole("heading", { name: clubName }) })
+    .getByRole("link", { name: "Open workspace" })
+    .click();
+  await page.getByRole("link", { name: "Events" }).click();
+  const attendanceCard = page.locator("article").filter({
+    has: page.getByRole("heading", { name: eventTitle }),
+  });
+  await attendanceCard
+    .locator("summary")
+    .filter({ hasText: /^Registration and attendance roster$/ })
+    .click();
+  const attendanceForm = attendanceCard
+    .getByRole("button", { name: "Update attendance" })
+    .locator("xpath=ancestor::form");
+  await attendanceForm.getByLabel("Attendance status").selectOption("attended");
+  await attendanceForm.getByLabel("Reason").fill("Checked in at the E2E event desk");
+  await attendanceForm.getByRole("button", { name: "Update attendance" }).click();
+  await expect(
+    attendanceCard.locator("span").filter({ hasText: /^Attended$/ }),
+  ).toBeVisible();
 });

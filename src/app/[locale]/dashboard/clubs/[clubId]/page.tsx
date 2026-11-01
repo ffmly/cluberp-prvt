@@ -97,10 +97,10 @@ export default async function ClubWorkspacePage({
 
         <section className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {["members", "events", "tasks", "documents"].map((module) =>
-            module === "members" ? (
+            module === "members" || module === "events" ? (
               <Link
                 className="rounded-2xl border border-teal-200 bg-white p-5 shadow-sm transition hover:border-teal-400"
-                href={`/dashboard/clubs/${clubId}/members`}
+                href={`/dashboard/clubs/${clubId}/${module}`}
                 key={module}
                 prefetch
               >

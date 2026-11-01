@@ -74,6 +74,7 @@
     "openClubWorkspaces": "Open club workspaces",
     "discoverClubs": "Discover clubs",
     "myMemberships": "My memberships",
+    "discoverEvents": "Discover events",
     "moduleDescription": "Access appears when your scoped permissions allow it.",
     "modules": {
       "universities": "University administration",
@@ -636,6 +637,52 @@
       "invitationDuplicate": "A pending invitation already exists for this email.",
       "invitationFailed": "The invitation could not be changed."
     }
+  },
+  "EventManagement": {
+    "title": "Event management",
+    "back": "← Back to club workspace",
+    "heading": "Plan, approve, and operate events.",
+    "description": "Draft events, require a second authorized approver, enforce capacity and waitlists, and keep attendance corrections auditable.",
+    "newTitle": "Create an event or workshop",
+    "eventsTitle": "Event schedule",
+    "empty": "No events have been created for this club.",
+    "edit": "Edit draft",
+    "rosterTitle": "Registration and attendance roster",
+    "counts": "{registered} registered · {waitlisted} waiting · capacity {capacity}",
+    "created": "Event draft created.",
+    "updated": "Event draft updated.",
+    "attendanceUpdated": "Attendance updated and recorded in history.",
+    "types": { "event": "Event", "workshop": "Workshop" },
+    "statuses": { "draft": "Draft", "pending_approval": "Pending approval", "published": "Published", "cancelled": "Cancelled", "completed": "Completed" },
+    "registrationStatuses": { "registered": "Registered", "waitlisted": "Waitlisted", "cancelled": "Cancelled", "attended": "Attended", "no_show": "No show" },
+    "visibility": { "public": "Public", "members": "Active members" },
+    "eligibility": { "authenticated": "Any signed-in student", "active_members": "Active members only" },
+    "form": {
+      "title": "Title", "description": "Description", "type": "Type", "location": "Location or venue",
+      "startsAt": "Starts at", "endsAt": "Ends at", "registrationDeadline": "Registration deadline", "capacity": "Capacity (leave blank for unlimited)",
+      "visibility": "Visibility", "eligibility": "Eligibility", "save": "Save draft", "saving": "Saving…",
+      "submitApproval": "Submit for approval", "publish": "Approve and publish", "returnDraft": "Return to draft",
+      "cancelEvent": "Cancel event", "complete": "Mark complete", "cancel": "Cancel registration", "cancelling": "Cancelling…",
+      "reason": "Reason", "attendance": "Attendance status", "mark": "Update attendance"
+    },
+    "success": { "draft": "Event returned to draft.", "pending_approval": "Event submitted for approval.", "published": "Event approved and published.", "cancelled": "Event cancelled.", "completed": "Event marked complete." },
+    "errors": { "checkFields": "Check the schedule, required fields, and capacity.", "sessionExpired": "Your session expired. Sign in and try again.", "saveFailed": "The event draft could not be saved.", "transitionInvalid": "Enter a valid reason for this transition.", "transitionFailed": "The event transition is invalid, or a different approver is required.", "attendanceInvalid": "Choose an attendance result and enter a reason.", "attendanceFailed": "Attendance could not be updated." }
+  },
+  "Events": {
+    "title": "Events",
+    "back": "← Back to workspace",
+    "eyebrow": "Student event directory",
+    "heading": "Find your next event or workshop.",
+    "description": "Register while places remain, join an automatic waitlist when full, and see your current registration status.",
+    "empty": "No published upcoming events are available.",
+    "loadError": "Events could not be loaded.",
+    "places": "{registered} registered · capacity {capacity}",
+    "registered": "Registration confirmed.",
+    "waitlisted": "The event is full. You joined the waitlist.",
+    "cancelled": "Registration cancelled. The next waiting student was promoted when applicable.",
+    "statuses": { "registered": "Registered", "waitlisted": "Waitlisted", "cancelled": "Cancelled", "attended": "Attended", "no_show": "No show" },
+    "form": { "register": "Register", "registering": "Registering…", "cancel": "Cancel registration", "cancelling": "Cancelling…" },
+    "errors": { "sessionExpired": "Your session expired. Sign in and try again.", "duplicate": "You already have a registration for this event.", "registerFailed": "Registration is closed, restricted, or no longer available.", "cancelFailed": "This registration can no longer be cancelled." }
   },
   "Common": {
     "brandSubtitle": "University club operations",

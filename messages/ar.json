@@ -74,6 +74,7 @@
     "openClubWorkspaces": "فتح مساحات الأندية",
     "discoverClubs": "اكتشاف الأندية",
     "myMemberships": "عضوياتي",
+    "discoverEvents": "اكتشاف الفعاليات",
     "moduleDescription": "يظهر الوصول عندما تسمح به صلاحياتك محددة النطاق.",
     "modules": {
       "universities": "إدارة الجامعات",
@@ -636,6 +637,52 @@
       "invitationDuplicate": "توجد دعوة معلقة لهذا البريد بالفعل.",
       "invitationFailed": "تعذر تغيير الدعوة."
     }
+  },
+  "EventManagement": {
+    "title": "إدارة الفعاليات",
+    "back": "← العودة إلى مساحة النادي",
+    "heading": "خطّط للفعاليات ووافق عليها وشغّلها.",
+    "description": "أنشئ المسودات، واشترط موافقة مسؤول آخر، وطبّق السعة وقائمة الانتظار، واحتفظ بسجل تدقيق الحضور.",
+    "newTitle": "إنشاء فعالية أو ورشة",
+    "eventsTitle": "جدول الفعاليات",
+    "empty": "لم تُنشأ فعاليات لهذا النادي بعد.",
+    "edit": "تعديل المسودة",
+    "rosterTitle": "قائمة التسجيل والحضور",
+    "counts": "{registered} مسجل · {waitlisted} في الانتظار · السعة {capacity}",
+    "created": "تم إنشاء مسودة الفعالية.",
+    "updated": "تم تحديث مسودة الفعالية.",
+    "attendanceUpdated": "تم تحديث الحضور وحفظه في السجل.",
+    "types": { "event": "فعالية", "workshop": "ورشة" },
+    "statuses": { "draft": "مسودة", "pending_approval": "في انتظار الموافقة", "published": "منشورة", "cancelled": "ملغاة", "completed": "مكتملة" },
+    "registrationStatuses": { "registered": "مسجل", "waitlisted": "قائمة الانتظار", "cancelled": "ملغى", "attended": "حضر", "no_show": "لم يحضر" },
+    "visibility": { "public": "عامة", "members": "الأعضاء النشطون" },
+    "eligibility": { "authenticated": "أي طالب مسجل الدخول", "active_members": "الأعضاء النشطون فقط" },
+    "form": {
+      "title": "العنوان", "description": "الوصف", "type": "النوع", "location": "المكان أو القاعة",
+      "startsAt": "وقت البداية", "endsAt": "وقت النهاية", "registrationDeadline": "آخر أجل للتسجيل", "capacity": "السعة (اتركها فارغة دون حد)",
+      "visibility": "الظهور", "eligibility": "الأهلية", "save": "حفظ المسودة", "saving": "جارٍ الحفظ…",
+      "submitApproval": "إرسال للموافقة", "publish": "الموافقة والنشر", "returnDraft": "إعادة إلى المسودة",
+      "cancelEvent": "إلغاء الفعالية", "complete": "تعليم كمكتملة", "cancel": "إلغاء التسجيل", "cancelling": "جارٍ الإلغاء…",
+      "reason": "السبب", "attendance": "حالة الحضور", "mark": "تحديث الحضور"
+    },
+    "success": { "draft": "أعيدت الفعالية إلى المسودة.", "pending_approval": "أرسلت الفعالية للموافقة.", "published": "تمت الموافقة على الفعالية ونشرها.", "cancelled": "ألغيت الفعالية.", "completed": "تم تعليم الفعالية كمكتملة." },
+    "errors": { "checkFields": "راجع المواعيد والحقول المطلوبة والسعة.", "sessionExpired": "انتهت الجلسة. سجل الدخول وحاول مجدداً.", "saveFailed": "تعذر حفظ مسودة الفعالية.", "transitionInvalid": "أدخل سبباً صالحاً لهذا التغيير.", "transitionFailed": "التغيير غير صالح أو يتطلب موافقة مسؤول آخر.", "attendanceInvalid": "اختر نتيجة الحضور وأدخل السبب.", "attendanceFailed": "تعذر تحديث الحضور." }
+  },
+  "Events": {
+    "title": "الفعاليات",
+    "back": "← العودة إلى مساحة العمل",
+    "eyebrow": "دليل فعاليات الطلبة",
+    "heading": "اكتشف فعاليتك أو ورشتك القادمة.",
+    "description": "سجل عند توفر الأماكن، وانضم تلقائياً لقائمة الانتظار عند الامتلاء، وتابع حالة تسجيلك.",
+    "empty": "لا توجد فعاليات قادمة منشورة.",
+    "loadError": "تعذر تحميل الفعاليات.",
+    "places": "{registered} مسجل · السعة {capacity}",
+    "registered": "تم تأكيد التسجيل.",
+    "waitlisted": "الفعالية ممتلئة. انضممت إلى قائمة الانتظار.",
+    "cancelled": "ألغي التسجيل وتمت ترقية أول منتظر عند الحاجة.",
+    "statuses": { "registered": "مسجل", "waitlisted": "قائمة الانتظار", "cancelled": "ملغى", "attended": "حضر", "no_show": "لم يحضر" },
+    "form": { "register": "التسجيل", "registering": "جارٍ التسجيل…", "cancel": "إلغاء التسجيل", "cancelling": "جارٍ الإلغاء…" },
+    "errors": { "sessionExpired": "انتهت الجلسة. سجل الدخول وحاول مجدداً.", "duplicate": "لديك تسجيل سابق لهذه الفعالية.", "registerFailed": "التسجيل مغلق أو مقيّد أو لم يعد متاحاً.", "cancelFailed": "لم يعد ممكناً إلغاء هذا التسجيل." }
   },
   "Common": {
     "brandSubtitle": "عمليات الأندية الجامعية",
