@@ -63,6 +63,82 @@ isOneToOne: false
       referencedColumns: ["id"]
     }
                   ]
+                },"club_invitations": {
+                  Row: {
+                    "accepted_by": string | null,"club_id": string,"created_at": string,"expires_at": string,"id": string,"invited_by": string,"membership_id": string | null,"recipient_email": string,"status": string,"token_digest": string,"updated_at": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "accepted_by"?: string | null,"club_id": string,"created_at"?: string,"expires_at": string,"id"?: string,"invited_by": string,"membership_id"?: string | null,"recipient_email": string,"status"?: string,"token_digest": string,"updated_at"?: string
+                  }
+                  Update: {
+                    "accepted_by"?: string | null,"club_id"?: string,"created_at"?: string,"expires_at"?: string,"id"?: string,"invited_by"?: string,"membership_id"?: string | null,"recipient_email"?: string,"status"?: string,"token_digest"?: string,"updated_at"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "club_invitations_accepted_by_fkey"
+      columns: ["accepted_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "club_invitations_club_id_fkey"
+      columns: ["club_id"]
+isOneToOne: false
+      referencedRelation: "clubs"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "club_invitations_invited_by_fkey"
+      columns: ["invited_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "club_invitations_membership_id_fkey"
+      columns: ["membership_id"]
+isOneToOne: false
+      referencedRelation: "club_memberships"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"club_memberships": {
+                  Row: {
+                    "club_id": string,"created_at": string,"created_by": string,"end_reason": string | null,"ended_at": string | null,"ended_by": string | null,"id": string,"joined_at": string,"status": string,"updated_at": string,"user_id": string,"valid_until": string | null
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "club_id": string,"created_at"?: string,"created_by": string,"end_reason"?: string | null,"ended_at"?: string | null,"ended_by"?: string | null,"id"?: string,"joined_at"?: string,"status"?: string,"updated_at"?: string,"user_id": string,"valid_until"?: string | null
+                  }
+                  Update: {
+                    "club_id"?: string,"created_at"?: string,"created_by"?: string,"end_reason"?: string | null,"ended_at"?: string | null,"ended_by"?: string | null,"id"?: string,"joined_at"?: string,"status"?: string,"updated_at"?: string,"user_id"?: string,"valid_until"?: string | null
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "club_memberships_club_id_fkey"
+      columns: ["club_id"]
+isOneToOne: false
+      referencedRelation: "clubs"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "club_memberships_created_by_fkey"
+      columns: ["created_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "club_memberships_ended_by_fkey"
+      columns: ["ended_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "club_memberships_user_id_fkey"
+      columns: ["user_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    }
+                  ]
                 },"club_requests": {
                   Row: {
                     "club_id": string | null,"created_at": string,"decision_reason": string | null,"id": string,"proposed_description": string | null,"proposed_name": string,"proposed_slug": string,"request_type": string,"reviewed_at": string | null,"reviewer_id": string | null,"status": string,"submitted_at": string,"submitter_id": string,"university_id": string,"updated_at": string
@@ -232,6 +308,82 @@ isOneToOne: false
       columns: ["university_id"]
 isOneToOne: false
       referencedRelation: "universities"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"membership_applications": {
+                  Row: {
+                    "answers": NonNullable<Json>,"applicant_id": string,"application_type": string,"club_id": string,"created_at": string,"decision_reason": string | null,"form_version": number,"id": string,"membership_id": string | null,"motivation": string,"reviewed_at": string | null,"reviewer_id": string | null,"status": string,"submitted_at": string,"updated_at": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "answers"?: NonNullable<Json>,"applicant_id": string,"application_type"?: string,"club_id": string,"created_at"?: string,"decision_reason"?: string | null,"form_version"?: number,"id"?: string,"membership_id"?: string | null,"motivation": string,"reviewed_at"?: string | null,"reviewer_id"?: string | null,"status"?: string,"submitted_at"?: string,"updated_at"?: string
+                  }
+                  Update: {
+                    "answers"?: NonNullable<Json>,"applicant_id"?: string,"application_type"?: string,"club_id"?: string,"created_at"?: string,"decision_reason"?: string | null,"form_version"?: number,"id"?: string,"membership_id"?: string | null,"motivation"?: string,"reviewed_at"?: string | null,"reviewer_id"?: string | null,"status"?: string,"submitted_at"?: string,"updated_at"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "membership_applications_applicant_id_fkey"
+      columns: ["applicant_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "membership_applications_club_id_fkey"
+      columns: ["club_id"]
+isOneToOne: false
+      referencedRelation: "clubs"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "membership_applications_membership_id_fkey"
+      columns: ["membership_id"]
+isOneToOne: false
+      referencedRelation: "club_memberships"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "membership_applications_reviewer_id_fkey"
+      columns: ["reviewer_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"membership_status_history": {
+                  Row: {
+                    "actor_id": string,"club_id": string,"created_at": string,"from_status": string | null,"id": string,"membership_id": string,"reason": string | null,"to_status": string,"user_id": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "actor_id": string,"club_id": string,"created_at"?: string,"from_status"?: string | null,"id"?: string,"membership_id": string,"reason"?: string | null,"to_status": string,"user_id": string
+                  }
+                  Update: {
+                    "actor_id"?: string,"club_id"?: string,"created_at"?: string,"from_status"?: string | null,"id"?: string,"membership_id"?: string,"reason"?: string | null,"to_status"?: string,"user_id"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "membership_status_history_actor_id_fkey"
+      columns: ["actor_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "membership_status_history_club_id_fkey"
+      columns: ["club_id"]
+isOneToOne: false
+      referencedRelation: "clubs"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "membership_status_history_membership_id_fkey"
+      columns: ["membership_id"]
+isOneToOne: false
+      referencedRelation: "club_memberships"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "membership_status_history_user_id_fkey"
+      columns: ["user_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
       referencedColumns: ["id"]
     }
                   ]
@@ -567,7 +719,10 @@ isOneToOne: false
             [_ in never]: never
           }
           Functions: {
-            "archive_club_team":
+            "accept_club_invitation":
+{ Args: { "raw_token": string }; Returns: string
+                           },
+"archive_club_team":
 { Args: { "target_club_id": string,"target_team_id": string }; Returns: string
                            },
 "archive_platform_role":
@@ -578,6 +733,9 @@ isOneToOne: false
                            },
 "assign_platform_role":
 { Args: { "target_role_id": string,"target_user_id": string }; Returns: string
+                           },
+"create_club_invitation":
+{ Args: { "expires_at": string,"raw_token": string,"recipient_email": string,"target_club_id": string }; Returns: string
                            },
 "current_user_has_permission":
 { Args: { "permission_key": string,"scope_id"?: string,"scope_type": string }; Returns: boolean
@@ -592,14 +750,29 @@ isOneToOne: false
               "role_description": string,"role_id": string,"role_key": string,"role_name": string
             }[]
                            },
+"list_club_invitations":
+{ Args: { "target_club_id": string }; Returns: {
+              "created_at": string,"expires_at": string,"invitation_id": string,"invitation_status": string,"recipient_email": string
+            }[]
+                           },
 "list_club_leadership":
 { Args: { "target_club_id": string }; Returns: {
               "assignment_id": string,"display_name": string,"email": string,"role_id": string,"role_key": string,"role_name": string,"starts_at": string,"user_id": string
             }[]
                            },
+"list_club_members":
+{ Args: { "target_club_id": string }; Returns: {
+              "display_name": string,"email": string,"end_reason": string,"ended_at": string,"joined_at": string,"membership_id": string,"membership_status": string,"user_id": string,"valid_until": string
+            }[]
+                           },
 "list_club_teams":
 { Args: { "target_club_id": string }; Returns: {
               "team_description": string,"team_id": string,"team_name": string,"team_status": string,"updated_at": string
+            }[]
+                           },
+"list_discoverable_clubs":
+{ Args: { "search_query"?: string }; Returns: {
+              "application_status": string,"club_description": string,"club_id": string,"club_name": string,"club_slug": string,"membership_status": string,"university_id": string,"university_name": string
             }[]
                            },
 "list_grantable_platform_permissions":
@@ -620,6 +793,16 @@ isOneToOne: false
 "list_my_club_workspaces":
 { Args: Record<PropertyKey, never>; Returns: {
               "can_manage": boolean,"club_description": string,"club_id": string,"club_name": string,"club_slug": string,"club_status": string,"club_visibility": string,"role_names": string,"university_id": string,"university_name": string
+            }[]
+                           },
+"list_my_membership_applications":
+{ Args: Record<PropertyKey, never>; Returns: {
+              "answers": Json,"application_id": string,"application_type": string,"club_id": string,"club_name": string,"decision_reason": string,"membership_id": string,"motivation": string,"reviewed_at": string,"status": string,"submitted_at": string,"university_name": string
+            }[]
+                           },
+"list_my_memberships":
+{ Args: Record<PropertyKey, never>; Returns: {
+              "club_id": string,"club_name": string,"joined_at": string,"membership_id": string,"membership_status": string,"university_name": string,"valid_until": string
             }[]
                            },
 "list_platform_audit_events":
@@ -647,6 +830,11 @@ isOneToOne: false
               "club_id": string,"decision_reason": string,"proposed_description": string,"proposed_name": string,"proposed_slug": string,"request_id": string,"request_type": string,"reviewed_at": string,"status": string,"submitted_at": string,"submitter_email": string,"submitter_id": string,"submitter_name": string,"university_id": string,"university_name": string
             }[]
                            },
+"list_reviewable_membership_applications":
+{ Args: { "target_club_id": string }; Returns: {
+              "answers": Json,"applicant_email": string,"applicant_id": string,"applicant_name": string,"application_id": string,"application_type": string,"decision_reason": string,"membership_id": string,"motivation": string,"reviewed_at": string,"status": string,"submitted_at": string
+            }[]
+                           },
 "list_university_staff":
 { Args: { "target_university_id": string }; Returns: {
               "assignment_id": string,"display_name": string,"email": string,"ends_at": string,"scope_id": string,"scope_type": string,"staff_type": string,"starts_at": string,"status": string,"title": string,"updated_at": string,"user_id": string
@@ -661,6 +849,12 @@ isOneToOne: false
 { Args: { "email_query": string,"target_university_id": string }; Returns: {
               "display_name": string,"email": string,"user_id": string
             }[]
+                           },
+"resign_membership":
+{ Args: { "reason": string,"target_membership_id": string }; Returns: string
+                           },
+"revoke_club_invitation":
+{ Args: { "target_invitation_id": string }; Returns: string
                            },
 "revoke_club_role":
 { Args: { "reason": string,"target_assignment_id": string,"target_club_id": string }; Returns: string
@@ -680,8 +874,20 @@ isOneToOne: false
 "submit_club_request":
 { Args: { "proposed_description": string,"proposed_name": string,"proposed_slug": string,"request_type": string,"target_club_id": string,"target_university_id": string }; Returns: string
                            },
+"submit_membership_application":
+{ Args: { "answers": Json,"application_type": string,"motivation": string,"target_club_id": string,"target_membership_id": string }; Returns: string
+                           },
 "transition_club_request":
 { Args: { "new_status": string,"reason": string,"target_request_id": string }; Returns: string
+                           },
+"transition_membership_application":
+{ Args: { "new_status": string,"reason": string,"target_application_id": string }; Returns: string
+                           },
+"transition_membership_status":
+{ Args: { "new_status": string,"reason": string,"target_membership_id": string }; Returns: string
+                           },
+"withdraw_membership_application":
+{ Args: { "target_application_id": string }; Returns: string
                            }
           }
           Enums: {
