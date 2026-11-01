@@ -1216,9 +1216,9 @@ Use the master plan to maintain an ordered, actionable checklist.
 - [x] Student portal.
 - [x] Events and workshops.
 - [x] Registration and attendance.
-- [ ] Dynamic forms.
-- [ ] Tasks and documents.
-- [ ] Announcements and notifications.
+- [x] Dynamic forms.
+- [x] Tasks and documents.
+- [x] Announcements and notifications.
 
 ## Phase 4 — Business operations
 

@@ -614,17 +614,17 @@ CI on pull/push installs with the lockfile, validates formatting/lint/types/test
 
 ## 23. Implementation roadmap
 
-**Current milestone:** Phase 3 in progress — versioned forms and collaboration are next
+**Current milestone:** Phase 3 complete — Phase 4 business operations is next
 
-**Delivered on `main`:** the complete Phase 2 administration scope plus the first Phase 3 vertical slices: bilingual club workspaces, teams and leadership; membership applications, invitations, decisions, renewal and lifecycle history; a public club discovery experience; and a personal student membership portal. Database-enforced authorization and authenticated browser coverage span the delivered administration and membership paths.
+**Delivered on `main`:** the complete Phase 2 administration scope and Phase 3 club operations: bilingual club workspaces, teams and leadership; membership applications, invitations, decisions, renewal and history; student discovery and personal portal; event approval, publication, capacity, waitlists, registration and attendance correction; versioned dynamic forms with server-side submission validation; tasks, comments and assignment notifications; protected document/media metadata; announcements; and recipient-owned in-app notifications. Database-enforced authorization and authenticated browser coverage span the delivered workflows.
 
-**Verification baseline:** 36 unit/schema tests, 203 pgTAP database tests, 5 Playwright flows (including membership and event approval/registration/attendance journeys), database lint, TypeScript, ESLint, and the production build pass locally. Every new milestone must restore that full green baseline before completion.
+**Verification baseline:** 36 unit/schema tests, 229 pgTAP database tests, 5 Playwright flows (including the full administration, membership, event, collaboration, and notification journey), database lint, TypeScript, ESLint, and the production build pass locally. Every new milestone must restore that full green baseline before completion.
 
-The active implementation sequence is:
+The next implementation sequence is:
 
-1. Events, approval/publication, registration, waitlists, attendance, and statistics.
-2. Versioned dynamic forms and server-side submission validation.
-3. Tasks, documents/media metadata, announcements, and in-app notifications.
+1. Budget periods, allocations, funding requests, expenses, and approval separation.
+2. Assets, assignments/returns, sponsors, and partnerships.
+3. Certificates, reports, and secure exports.
 
 ### Phase 0 — Repository and planning
 
@@ -663,7 +663,9 @@ The active implementation sequence is:
 - [x] Membership forms, applications, invitations, decisions, renewals, history.
 - [x] Student discovery and personal portal.
 - [x] Events, approval/publication, registration, capacity/waitlist, attendance.
-- [ ] Versioned forms, tasks, documents/media, announcements, notifications.
+- [x] Versioned forms, tasks, documents/media, announcements, notifications.
+
+Phase 3 document/media delivery currently implements provider metadata, ownership, visibility, lifecycle, and authorization. Actual Cloudinary upload/signing is intentionally not claimed or enabled until valid restricted credentials are configured; private assets must use signed delivery when that integration is activated.
 
 ### Phase 4 — Business operations
 
