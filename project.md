@@ -1214,8 +1214,8 @@ Use the master plan to maintain an ordered, actionable checklist.
 - [x] Club workspaces.
 - [x] Membership management.
 - [x] Student portal.
-- [ ] Events and workshops.
-- [ ] Registration and attendance.
+- [x] Events and workshops.
+- [x] Registration and attendance.
 - [ ] Dynamic forms.
 - [ ] Tasks and documents.
 - [ ] Announcements and notifications.

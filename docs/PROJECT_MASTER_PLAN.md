@@ -614,11 +614,11 @@ CI on pull/push installs with the lockfile, validates formatting/lint/types/test
 
 ## 23. Implementation roadmap
 
-**Current milestone:** Phase 3 in progress — events and attendance are next
+**Current milestone:** Phase 3 in progress — versioned forms and collaboration are next
 
 **Delivered on `main`:** the complete Phase 2 administration scope plus the first Phase 3 vertical slices: bilingual club workspaces, teams and leadership; membership applications, invitations, decisions, renewal and lifecycle history; a public club discovery experience; and a personal student membership portal. Database-enforced authorization and authenticated browser coverage span the delivered administration and membership paths.
 
-**Verification baseline:** 32 unit/schema tests, 178 pgTAP database tests, 5 Playwright flows (including the authenticated discovery-to-active-membership journey), database lint, TypeScript, ESLint, and the production build pass locally. Every new milestone must restore that full green baseline before completion.
+**Verification baseline:** 36 unit/schema tests, 203 pgTAP database tests, 5 Playwright flows (including membership and event approval/registration/attendance journeys), database lint, TypeScript, ESLint, and the production build pass locally. Every new milestone must restore that full green baseline before completion.
 
 The active implementation sequence is:
 
@@ -662,7 +662,7 @@ The active implementation sequence is:
 - [x] Club workspace, teams, leadership, and navigation.
 - [x] Membership forms, applications, invitations, decisions, renewals, history.
 - [x] Student discovery and personal portal.
-- [ ] Events, approval/publication, registration, capacity/waitlist, attendance.
+- [x] Events, approval/publication, registration, capacity/waitlist, attendance.
 - [ ] Versioned forms, tasks, documents/media, announcements, notifications.
 
 ### Phase 4 — Business operations
