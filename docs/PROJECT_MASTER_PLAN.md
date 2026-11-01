@@ -614,17 +614,17 @@ CI on pull/push installs with the lockfile, validates formatting/lint/types/test
 
 ## 23. Implementation roadmap
 
-**Current milestone:** Phase 2 complete — preparing Phase 3 club operations
+**Current milestone:** Phase 3 in progress — events and attendance are next
 
-**Delivered on `main`:** the complete Phase 2 administration scope: platform dashboard; bilingual university lifecycle and hierarchy management; secure staff lookup and assignment; user suspension/reactivation; custom platform role administration with escalation protection; append-only audit history; and club creation/renewal requests with atomic review transitions and automatic club-president assignment. Database-enforced authorization and authenticated browser coverage span the delivered administration path.
+**Delivered on `main`:** the complete Phase 2 administration scope plus the first Phase 3 vertical slices: bilingual club workspaces, teams and leadership; membership applications, invitations, decisions, renewal and lifecycle history; a public club discovery experience; and a personal student membership portal. Database-enforced authorization and authenticated browser coverage span the delivered administration and membership paths.
 
-**Verification baseline:** 28 unit/schema tests, 115 pgTAP database tests, 5 Playwright flows, database lint, security advisors, TypeScript, ESLint, and the production build pass locally. The delivered baseline also passes GitHub Actions; every new milestone must restore that full green baseline before completion.
+**Verification baseline:** 32 unit/schema tests, 178 pgTAP database tests, 5 Playwright flows (including the authenticated discovery-to-active-membership journey), database lint, TypeScript, ESLint, and the production build pass locally. Every new milestone must restore that full green baseline before completion.
 
-The next implementation sequence is:
+The active implementation sequence is:
 
-1. Club workspaces and active club context.
-2. Membership applications, decisions, and membership lifecycle.
-3. Student portal and member directory.
+1. Events, approval/publication, registration, waitlists, attendance, and statistics.
+2. Versioned dynamic forms and server-side submission validation.
+3. Tasks, documents/media metadata, announcements, and in-app notifications.
 
 ### Phase 0 — Repository and planning
 
@@ -659,9 +659,9 @@ The next implementation sequence is:
 
 ### Phase 3 — Club and student operations
 
-- [ ] Club workspace, teams, leadership, and navigation.
-- [ ] Membership forms, applications, invitations, decisions, renewals, history.
-- [ ] Student discovery and personal portal.
+- [x] Club workspace, teams, leadership, and navigation.
+- [x] Membership forms, applications, invitations, decisions, renewals, history.
+- [x] Student discovery and personal portal.
 - [ ] Events, approval/publication, registration, capacity/waitlist, attendance.
 - [ ] Versioned forms, tasks, documents/media, announcements, notifications.
 

@@ -1211,9 +1211,9 @@ Use the master plan to maintain an ordered, actionable checklist.
 
 ## Phase 3 — Club operations
 
-- [ ] Club workspaces.
-- [ ] Membership management.
-- [ ] Student portal.
+- [x] Club workspaces.
+- [x] Membership management.
+- [x] Student portal.
 - [ ] Events and workshops.
 - [ ] Registration and attendance.
 - [ ] Dynamic forms.
