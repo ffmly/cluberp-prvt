@@ -284,4 +284,32 @@ test("platform manager creates a university through the protected workflow", asy
   await expect(
     clubRequestCard.locator("span").filter({ hasText: /^Approved$/ }),
   ).toBeVisible();
+
+  await page.getByRole("button", { name: "Sign out" }).click();
+  await page.getByLabel("University email").fill("staff-candidate@example.test");
+  await page.getByLabel("Password").fill("StaffTest!2026");
+  await page.getByRole("button", { name: "Sign in" }).click();
+  await page.getByRole("link", { name: "Open club workspaces" }).click();
+  await expect(page).toHaveURL(/\/en\/dashboard\/clubs$/);
+
+  const workspaceCard = page.locator("article").filter({
+    has: page.getByRole("heading", { name: clubName }),
+  });
+  await workspaceCard.getByRole("link", { name: "Open workspace" }).click();
+  await expect(page.getByRole("heading", { name: clubName })).toBeVisible();
+  await expect(page.getByText("Club President", { exact: true })).toBeVisible();
+
+  const teamSection = page.locator("section").filter({
+    has: page.getByRole("heading", { name: "Teams and committees" }),
+  });
+  await teamSection.getByLabel("Team name").first().fill("E2E Programs Team");
+  await teamSection
+    .getByLabel("Description")
+    .first()
+    .fill("Coordinates the club program calendar.");
+  await teamSection.getByRole("button", { name: "Save team" }).first().click();
+  await expect(page.getByText("Team created successfully.")).toBeVisible();
+  await expect(teamSection.getByLabel("Team name").last()).toHaveValue(
+    "E2E Programs Team",
+  );
 });
