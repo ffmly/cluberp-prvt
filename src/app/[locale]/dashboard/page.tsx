@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound, redirect } from "next/navigation";
+import { connection } from "next/server";
 
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { signOutAction } from "@/features/auth/actions";
@@ -43,6 +44,7 @@ export default async function DashboardPage({
   }
 
   setRequestLocale(locale);
+  await connection();
 
   const supabase = await createClient();
   const { data, error } = await supabase.auth.getClaims();
@@ -166,6 +168,12 @@ export default async function DashboardPage({
           </Link>
           <Link className="ms-3 mt-6 inline-flex min-h-11 items-center rounded-xl bg-[var(--brand-strong)] px-5 py-2.5 text-sm font-semibold text-white" href="/dashboard/clubs">
             {t("openClubWorkspaces")}
+          </Link>
+          <Link className="ms-3 mt-6 inline-flex min-h-11 items-center rounded-xl border border-teal-200 bg-white px-5 py-2.5 text-sm font-semibold text-teal-800" href="/dashboard/discover">
+            {t("discoverClubs")}
+          </Link>
+          <Link className="ms-3 mt-6 inline-flex min-h-11 items-center rounded-xl border border-teal-200 bg-white px-5 py-2.5 text-sm font-semibold text-teal-800" href="/dashboard/memberships">
+            {t("myMemberships")}
           </Link>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

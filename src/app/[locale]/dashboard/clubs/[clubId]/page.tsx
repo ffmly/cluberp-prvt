@@ -96,12 +96,24 @@ export default async function ClubWorkspacePage({
         </section>
 
         <section className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {["members", "events", "tasks", "documents"].map((module) => (
-            <div className="rounded-2xl border border-[var(--border-subtle)] bg-white p-5 shadow-sm" key={module}>
-              <p className="font-semibold">{t(`modules.${module}`)}</p>
-              <p className="mt-2 text-sm leading-6 text-[var(--text-muted)]">{t("moduleReady")}</p>
-            </div>
-          ))}
+          {["members", "events", "tasks", "documents"].map((module) =>
+            module === "members" ? (
+              <Link
+                className="rounded-2xl border border-teal-200 bg-white p-5 shadow-sm transition hover:border-teal-400"
+                href={`/dashboard/clubs/${clubId}/members`}
+                key={module}
+                prefetch
+              >
+                <p className="font-semibold text-teal-800">{t(`modules.${module}`)}</p>
+                <p className="mt-2 text-sm leading-6 text-[var(--text-muted)]">{t("moduleReady")}</p>
+              </Link>
+            ) : (
+              <div className="rounded-2xl border border-[var(--border-subtle)] bg-white p-5 shadow-sm" key={module}>
+                <p className="font-semibold">{t(`modules.${module}`)}</p>
+                <p className="mt-2 text-sm leading-6 text-[var(--text-muted)]">{t("moduleReady")}</p>
+              </div>
+            ),
+          )}
         </section>
 
         <div className="mt-12 grid gap-8 xl:grid-cols-[1.2fr_0.8fr]">

@@ -1,6 +1,6 @@
 begin;
 
-select plan(20);
+select plan(21);
 
 insert into auth.users (id, email, raw_user_meta_data)
 values
@@ -95,6 +95,12 @@ select is(
   (select status from public.clubs where university_id = '9aaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa1' and slug = 'robotics-club'),
   'active',
   'approval atomically creates an active club'
+);
+
+select is(
+  (select visibility from public.clubs where university_id = '9aaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa1' and slug = 'robotics-club'),
+  'public',
+  'newly approved clubs are discoverable by students'
 );
 
 select ok(

@@ -280,7 +280,7 @@ begin
         request_record.proposed_name,
         request_record.proposed_slug,
         request_record.proposed_description,
-        'university',
+        'public',
         'active',
         request_record.submitter_id
       ) returning id into created_club_id;

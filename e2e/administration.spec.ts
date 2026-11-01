@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test.setTimeout(90_000);
+test.setTimeout(240_000);
 
 test("platform manager creates a university through the protected workflow", async ({
   page,
@@ -312,4 +312,81 @@ test("platform manager creates a university through the protected workflow", asy
   await expect(teamSection.getByLabel("Team name").last()).toHaveValue(
     "E2E Programs Team",
   );
+
+  await page.goto("/en/dashboard");
+  await page.getByRole("button", { name: "Sign out" }).click();
+  await page.getByLabel("University email").fill("student-member@example.test");
+  await page.getByLabel("Password").fill("StudentTest!2026");
+  await page.getByRole("button", { name: "Sign in" }).click();
+  await page.getByRole("link", { name: "Discover clubs" }).click();
+  await expect(page).toHaveURL(/\/en\/dashboard\/discover$/);
+
+  const discoveryCard = page.locator("article").filter({
+    has: page.getByRole("heading", { name: clubName }),
+  });
+  await discoveryCard
+    .locator("summary")
+    .filter({ hasText: /^Apply to join$/ })
+    .click();
+  await discoveryCard
+    .getByLabel("Why do you want to join?")
+    .fill("I want to help build robotics workshops for students.");
+  await discoveryCard
+    .getByLabel("Interests or skills")
+    .fill("Robotics, mentoring, and event support");
+  await discoveryCard
+    .getByRole("button", { name: "Submit application" })
+    .click();
+  await expect(
+    discoveryCard.getByText("You already have an open application for this club."),
+  ).toBeVisible();
+
+  await page.goto("/en/dashboard");
+  await page.getByRole("button", { name: "Sign out" }).click();
+  await page.getByLabel("University email").fill("staff-candidate@example.test");
+  await page.getByLabel("Password").fill("StaffTest!2026");
+  await page.getByRole("button", { name: "Sign in" }).click();
+  await page.getByRole("link", { name: "Open club workspaces" }).click();
+  await page
+    .locator("article")
+    .filter({ has: page.getByRole("heading", { name: clubName }) })
+    .getByRole("link", { name: "Open workspace" })
+    .click();
+  await page.getByRole("link", { name: "Members" }).click();
+
+  const membershipApplicationCard = page.locator("article").filter({
+    has: page.getByRole("heading", { name: "E2E Student Member" }),
+  });
+  await membershipApplicationCard
+    .getByRole("button", { name: "Start review" })
+    .click();
+  await membershipApplicationCard
+    .getByLabel("Reason")
+    .fill("Student application meets membership requirements.");
+  await membershipApplicationCard
+    .getByRole("button", { name: "Approve" })
+    .click();
+  const memberDirectory = page.locator("section").filter({
+    has: page.getByRole("heading", { name: "Member directory" }),
+  });
+  await expect(
+    memberDirectory
+      .locator("article")
+      .filter({ hasText: "student-member@example.test" }),
+  ).toContainText("Active");
+
+  await page.goto("/en/dashboard");
+  await page.getByRole("button", { name: "Sign out" }).click();
+  await page.getByLabel("University email").fill("student-member@example.test");
+  await page.getByLabel("Password").fill("StudentTest!2026");
+  await page.getByRole("button", { name: "Sign in" }).click();
+  await page.getByRole("link", { name: "My memberships" }).click();
+  const myMemberships = page.locator("section").filter({
+    has: page.getByRole("heading", { name: "Your memberships" }),
+  });
+  await expect(
+    myMemberships
+      .locator("article")
+      .filter({ has: page.getByRole("heading", { name: clubName }) }),
+  ).toContainText("Active");
 });
