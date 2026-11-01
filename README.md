@@ -2,11 +2,11 @@
 
 A secure, multi-tenant University Club Management ERP and Design Platform built with Next.js, TypeScript, PostgreSQL, and Supabase.
 
-The product and architecture source of truth is [`docs/PROJECT_MASTER_PLAN.md`](docs/PROJECT_MASTER_PLAN.md).
+The product and architecture source of truth is [`docs/PROJECT_MASTER_PLAN.md`](docs/PROJECT_MASTER_PLAN.md). Use the [`docs/LOCAL_DEMO_GUIDE.md`](docs/LOCAL_DEMO_GUIDE.md) to explore every implemented persona and workflow locally.
 
 ## Current status
 
-The repository is in Phase 1 (technical foundation). The Next.js baseline, Supabase SSR boundary, email/password auth UI, and initial identity/organization migration are implemented. Live local Auth and RLS verification are pending recovery of the local Docker engine.
+Phase 3 is complete. The repository includes the technical foundation, scoped platform and university administration, club workspaces, membership operations, events and attendance, versioned forms, tasks, protected document metadata, announcements, and in-app notifications. Phase 4 business operations are next.
 
 ## Requirements
 
@@ -37,15 +37,24 @@ npm run db:types
 
 Stop the local stack without deleting its data with `npm run db:stop`.
 
+After the Phase 3 browser fixture has created a working university, club, and team, load the local exploration personas with:
+
+```powershell
+Get-Content -Raw supabase\fixtures\demo-personas.sql |
+  docker exec -i supabase_db_club-erp psql -U postgres -d postgres
+```
+
 ## Verification
 
 ```bash
 npm run lint
 npm run typecheck
+npm run test
 npm run build
+npm run test:e2e
 ```
 
-`npm run check` runs all three in sequence.
+`npm run check` runs lint, generated-route type checking, 36 unit/schema tests, and the production build. The database baseline contains 229 pgTAP assertions, and the browser baseline contains five Playwright flows.
 
 ## Project rules
 
