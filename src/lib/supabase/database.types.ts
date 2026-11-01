@@ -5,7 +5,33 @@ export type Database = {
   
   "public": {
           Tables: {
-            "audit_events": {
+            "attendance_history": {
+                  Row: {
+                    "changed_by": string,"created_at": string,"id": string,"new_status": string,"previous_status": string,"reason": string,"registration_id": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "changed_by": string,"created_at"?: string,"id"?: string,"new_status": string,"previous_status": string,"reason": string,"registration_id": string
+                  }
+                  Update: {
+                    "changed_by"?: string,"created_at"?: string,"id"?: string,"new_status"?: string,"previous_status"?: string,"reason"?: string,"registration_id"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "attendance_history_changed_by_fkey"
+      columns: ["changed_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "attendance_history_registration_id_fkey"
+      columns: ["registration_id"]
+isOneToOne: false
+      referencedRelation: "event_registrations"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"audit_events": {
                   Row: {
                     "action": string,"actor_id": string,"after_state": NonNullable<Json>,"before_state": NonNullable<Json>,"club_id": string | null,"created_at": string,"id": string,"metadata": NonNullable<Json>,"resource_id": string | null,"resource_type": string,"university_id": string | null
                   }
@@ -60,6 +86,38 @@ isOneToOne: false
       columns: ["university_id"]
 isOneToOne: false
       referencedRelation: "universities"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"club_events": {
+                  Row: {
+                    "approved_by": string | null,"cancellation_reason": string | null,"cancelled_at": string | null,"capacity": number | null,"club_id": string,"created_at": string,"created_by": string,"description": string,"eligibility": string,"ends_at": string,"event_type": string,"id": string,"location": string,"published_at": string | null,"registration_deadline": string,"starts_at": string,"status": string,"title": string,"updated_at": string,"visibility": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "approved_by"?: string | null,"cancellation_reason"?: string | null,"cancelled_at"?: string | null,"capacity"?: number | null,"club_id": string,"created_at"?: string,"created_by": string,"description": string,"eligibility"?: string,"ends_at": string,"event_type": string,"id"?: string,"location": string,"published_at"?: string | null,"registration_deadline": string,"starts_at": string,"status"?: string,"title": string,"updated_at"?: string,"visibility"?: string
+                  }
+                  Update: {
+                    "approved_by"?: string | null,"cancellation_reason"?: string | null,"cancelled_at"?: string | null,"capacity"?: number | null,"club_id"?: string,"created_at"?: string,"created_by"?: string,"description"?: string,"eligibility"?: string,"ends_at"?: string,"event_type"?: string,"id"?: string,"location"?: string,"published_at"?: string | null,"registration_deadline"?: string,"starts_at"?: string,"status"?: string,"title"?: string,"updated_at"?: string,"visibility"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "club_events_approved_by_fkey"
+      columns: ["approved_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "club_events_club_id_fkey"
+      columns: ["club_id"]
+isOneToOne: false
+      referencedRelation: "clubs"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "club_events_created_by_fkey"
+      columns: ["created_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
       referencedColumns: ["id"]
     }
                   ]
@@ -276,6 +334,58 @@ isOneToOne: false
       columns: ["university_id"]
 isOneToOne: false
       referencedRelation: "universities"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"event_registrations": {
+                  Row: {
+                    "cancelled_at": string | null,"event_id": string,"id": string,"registered_at": string,"status": string,"updated_at": string,"user_id": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "cancelled_at"?: string | null,"event_id": string,"id"?: string,"registered_at"?: string,"status": string,"updated_at"?: string,"user_id": string
+                  }
+                  Update: {
+                    "cancelled_at"?: string | null,"event_id"?: string,"id"?: string,"registered_at"?: string,"status"?: string,"updated_at"?: string,"user_id"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "event_registrations_event_id_fkey"
+      columns: ["event_id"]
+isOneToOne: false
+      referencedRelation: "club_events"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "event_registrations_user_id_fkey"
+      columns: ["user_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"event_status_history": {
+                  Row: {
+                    "changed_by": string,"created_at": string,"event_id": string,"from_status": string | null,"id": string,"reason": string | null,"to_status": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "changed_by": string,"created_at"?: string,"event_id": string,"from_status"?: string | null,"id"?: string,"reason"?: string | null,"to_status": string
+                  }
+                  Update: {
+                    "changed_by"?: string,"created_at"?: string,"event_id"?: string,"from_status"?: string | null,"id"?: string,"reason"?: string | null,"to_status"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "event_status_history_changed_by_fkey"
+      columns: ["changed_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "event_status_history_event_id_fkey"
+      columns: ["event_id"]
+isOneToOne: false
+      referencedRelation: "club_events"
       referencedColumns: ["id"]
     }
                   ]
@@ -734,6 +844,12 @@ isOneToOne: false
 "assign_platform_role":
 { Args: { "target_role_id": string,"target_user_id": string }; Returns: string
                            },
+"cancel_event_registration":
+{ Args: { "target_registration_id": string }; Returns: string
+                           },
+"create_club_event":
+{ Args: { "capacity": number,"eligibility": string,"ends_at": string,"event_description": string,"event_location": string,"event_title": string,"event_type": string,"registration_deadline": string,"starts_at": string,"target_club_id": string,"visibility": string }; Returns: string
+                           },
 "create_club_invitation":
 { Args: { "expires_at": string,"raw_token": string,"recipient_email": string,"target_club_id": string }; Returns: string
                            },
@@ -748,6 +864,11 @@ isOneToOne: false
 "list_assignable_club_roles":
 { Args: { "target_club_id": string }; Returns: {
               "role_description": string,"role_id": string,"role_key": string,"role_name": string
+            }[]
+                           },
+"list_club_events":
+{ Args: { "target_club_id": string }; Returns: {
+              "approved_by": string,"capacity": number,"created_by": string,"creator_name": string,"description": string,"eligibility": string,"ends_at": string,"event_id": string,"event_type": string,"location": string,"registered_count": number,"registration_deadline": string,"starts_at": string,"status": string,"title": string,"visibility": string,"waitlisted_count": number
             }[]
                            },
 "list_club_invitations":
@@ -773,6 +894,16 @@ isOneToOne: false
 "list_discoverable_clubs":
 { Args: { "search_query"?: string }; Returns: {
               "application_status": string,"club_description": string,"club_id": string,"club_name": string,"club_slug": string,"membership_status": string,"university_id": string,"university_name": string
+            }[]
+                           },
+"list_discoverable_events":
+{ Args: Record<PropertyKey, never>; Returns: {
+              "capacity": number,"club_id": string,"club_name": string,"description": string,"eligibility": string,"ends_at": string,"event_id": string,"event_type": string,"location": string,"registered_count": number,"registration_deadline": string,"registration_status": string,"starts_at": string,"title": string,"university_name": string,"waitlisted_count": number
+            }[]
+                           },
+"list_event_registrations":
+{ Args: { "target_event_id": string }; Returns: {
+              "display_name": string,"email": string,"registered_at": string,"registration_id": string,"status": string,"user_id": string
             }[]
                            },
 "list_grantable_platform_permissions":
@@ -850,6 +981,12 @@ isOneToOne: false
               "display_name": string,"email": string,"user_id": string
             }[]
                            },
+"mark_event_attendance":
+{ Args: { "attendance_status": string,"reason": string,"target_registration_id": string }; Returns: undefined
+                           },
+"register_for_event":
+{ Args: { "target_event_id": string }; Returns: string
+                           },
 "resign_membership":
 { Args: { "reason": string,"target_membership_id": string }; Returns: string
                            },
@@ -877,6 +1014,9 @@ isOneToOne: false
 "submit_membership_application":
 { Args: { "answers": Json,"application_type": string,"motivation": string,"target_club_id": string,"target_membership_id": string }; Returns: string
                            },
+"transition_club_event":
+{ Args: { "new_status": string,"reason"?: string,"target_event_id": string }; Returns: undefined
+                           },
 "transition_club_request":
 { Args: { "new_status": string,"reason": string,"target_request_id": string }; Returns: string
                            },
@@ -885,6 +1025,9 @@ isOneToOne: false
                            },
 "transition_membership_status":
 { Args: { "new_status": string,"reason": string,"target_membership_id": string }; Returns: string
+                           },
+"update_club_event":
+{ Args: { "capacity": number,"eligibility": string,"ends_at": string,"event_description": string,"event_location": string,"event_title": string,"event_type": string,"registration_deadline": string,"starts_at": string,"target_event_id": string,"visibility": string }; Returns: undefined
                            },
 "withdraw_membership_application":
 { Args: { "target_application_id": string }; Returns: string
