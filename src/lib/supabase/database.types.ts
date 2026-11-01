@@ -567,14 +567,40 @@ isOneToOne: false
             [_ in never]: never
           }
           Functions: {
-            "archive_platform_role":
+            "archive_club_team":
+{ Args: { "target_club_id": string,"target_team_id": string }; Returns: string
+                           },
+"archive_platform_role":
 { Args: { "reason": string,"target_role_id": string }; Returns: string
+                           },
+"assign_club_role":
+{ Args: { "target_club_id": string,"target_role_id": string,"target_user_id": string }; Returns: string
                            },
 "assign_platform_role":
 { Args: { "target_role_id": string,"target_user_id": string }; Returns: string
                            },
 "current_user_has_permission":
 { Args: { "permission_key": string,"scope_id"?: string,"scope_type": string }; Returns: boolean
+                           },
+"get_club_workspace":
+{ Args: { "target_club_id": string }; Returns: {
+              "can_manage_roles": boolean,"can_manage_settings": boolean,"can_manage_teams": boolean,"can_view_members": boolean,"club_description": string,"club_id": string,"club_name": string,"club_slug": string,"club_status": string,"club_visibility": string,"university_id": string,"university_name": string
+            }[]
+                           },
+"list_assignable_club_roles":
+{ Args: { "target_club_id": string }; Returns: {
+              "role_description": string,"role_id": string,"role_key": string,"role_name": string
+            }[]
+                           },
+"list_club_leadership":
+{ Args: { "target_club_id": string }; Returns: {
+              "assignment_id": string,"display_name": string,"email": string,"role_id": string,"role_key": string,"role_name": string,"starts_at": string,"user_id": string
+            }[]
+                           },
+"list_club_teams":
+{ Args: { "target_club_id": string }; Returns: {
+              "team_description": string,"team_id": string,"team_name": string,"team_status": string,"updated_at": string
+            }[]
                            },
 "list_grantable_platform_permissions":
 { Args: Record<PropertyKey, never>; Returns: {
@@ -589,6 +615,11 @@ isOneToOne: false
 "list_my_club_requests":
 { Args: Record<PropertyKey, never>; Returns: {
               "club_id": string,"decision_reason": string,"proposed_description": string,"proposed_name": string,"proposed_slug": string,"request_id": string,"request_type": string,"reviewed_at": string,"status": string,"submitted_at": string,"university_id": string,"university_name": string
+            }[]
+                           },
+"list_my_club_workspaces":
+{ Args: Record<PropertyKey, never>; Returns: {
+              "can_manage": boolean,"club_description": string,"club_id": string,"club_name": string,"club_slug": string,"club_status": string,"club_visibility": string,"role_names": string,"university_id": string,"university_name": string
             }[]
                            },
 "list_platform_audit_events":
@@ -621,13 +652,24 @@ isOneToOne: false
               "assignment_id": string,"display_name": string,"email": string,"ends_at": string,"scope_id": string,"scope_type": string,"staff_type": string,"starts_at": string,"status": string,"title": string,"updated_at": string,"user_id": string
             }[]
                            },
+"lookup_club_role_candidate":
+{ Args: { "email_query": string,"target_club_id": string }; Returns: {
+              "display_name": string,"email": string,"user_id": string
+            }[]
+                           },
 "lookup_university_staff_candidate":
 { Args: { "email_query": string,"target_university_id": string }; Returns: {
               "display_name": string,"email": string,"user_id": string
             }[]
                            },
+"revoke_club_role":
+{ Args: { "reason": string,"target_assignment_id": string,"target_club_id": string }; Returns: string
+                           },
 "revoke_platform_role_assignment":
 { Args: { "reason": string,"target_assignment_id": string }; Returns: string
+                           },
+"save_club_team":
+{ Args: { "target_club_id": string,"target_team_id": string,"team_description": string,"team_name": string }; Returns: string
                            },
 "save_platform_role":
 { Args: { "requested_permission_keys": (string)[],"role_description": string,"role_key": string,"role_name": string,"target_role_id": string }; Returns: string
